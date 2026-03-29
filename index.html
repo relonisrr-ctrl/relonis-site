@@ -1,0 +1,2985 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>合同会社Relonis | RELONIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ══ SHARED BASE ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#0F0F0F;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+
+/* ══ PAGE PANELS ══ */
+.page-panel{display:none;}
+.page-panel.active{display:block;}
+
+/* ══ HOME CSS ══ */
+
+
+/* ─────────────────────────────────────
+   TOKENS
+───────────────────────────────────── */
+:root {
+  --white:      #FFFFFF;
+  --bg:         #F6F6F4;
+  --bg-alt:     #EFEFED;
+  --border:     #E2E2E0;
+  --border-md:  #C8C8C6;
+  --text-1:     #0F0F0F;
+  --text-2:     #3C3C3C;
+  --text-3:     #787878;
+  --text-4:     #ADADAD;
+
+  --navy:       #0C1C35;
+  --blue:       #1756C8;
+  --blue-pale:  #E6EEFB;
+  --gold:       #BF9422;
+  --gold-pale:  #F3E6B0;
+
+  --dark:       #0F0F0F;
+  --dark-2:     #181818;
+
+  --mono: 'Montserrat', sans-serif;
+  --jp:   'Noto Sans JP', sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+
+/* ─────────────────────────────────────
+   BASE
+───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--jp);
+  background: var(--white);
+  color: var(--text-1);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 5vw; }
+
+/* ─────────────────────────────────────
+   REVEAL
+───────────────────────────────────── */
+.rev {
+  opacity: 1;
+  transform: none;
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.rev.in { opacity: 1; transform: none; }
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; }
+
+/* ─────────────────────────────────────
+   SECTION LABELS
+───────────────────────────────────── */
+.sec-label {
+  font-family: var(--mono);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.sec-label::before {
+  content: '';
+  width: 22px; height: 1.5px;
+  background: var(--border-md);
+  flex-shrink: 0;
+}
+.sec-label.blue-lbl  { color: var(--blue); }
+.sec-label.blue-lbl::before  { background: var(--blue); }
+.sec-label.gold-lbl  { color: var(--gold); }
+.sec-label.gold-lbl::before  { background: var(--gold); }
+.sec-label.white-lbl { color: rgba(255,255,255,.5); }
+.sec-label.white-lbl::before { background: rgba(255,255,255,.25); }
+
+.sec-title {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: .9;
+  color: var(--text-1);
+}
+.sec-title.on-dark { color: var(--white); }
+.sec-title em { font-style: normal; color: var(--blue); }
+.sec-title.on-dark em { color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   ① HEADER
+═══════════════════════════════════════════ */
+#site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 68px;
+  z-index: 900;
+  display: flex;
+  align-items: stretch;
+  transition: background .4s var(--ease), box-shadow .4s;
+}
+#site-header.solid {
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.hdr-inner {
+  width: 100%; max-width: 1140px;
+  margin: 0 auto; padding: 0 5vw;
+  display: flex; align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo { display: flex; align-items: center; }
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 1px 8px rgba(0,0,0,.6));
+  transition: filter .3s, opacity .3s;
+}
+#site-header.solid .logo-img {
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.2));
+}
+.logo-img:hover { opacity: .85; }
+
+/* Nav links */
+.nav-list { display: flex; gap: 2.2rem; list-style: none; }
+.nav-list a {
+  font-family: var(--mono);
+  font-size: .65rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  position: relative;
+  transition: color .25s;
+}
+.nav-list a::after {
+  content: ''; position: absolute;
+  bottom: -3px; left: 0;
+  height: 1px; width: 0;
+  background: var(--gold);
+  transition: width .35s var(--ease);
+}
+.nav-list a:hover { color: var(--white); }
+.nav-list a:hover::after { width: 100%; }
+#site-header.solid .nav-list a { color: var(--text-3); }
+#site-header.solid .nav-list a:hover { color: var(--text-1); }
+
+.hdr-cta {
+  font-family: var(--mono);
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--navy); background: var(--gold);
+  padding: 9px 22px;
+  transition: background .25s, transform .2s;
+}
+.hdr-cta:hover { background: #ceaa38; transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════
+   HERO — 65vh compact
+═══════════════════════════════════════════ */
+#hero {
+  position: relative;
+  height: 65vh;
+  min-height: 480px;
+  padding-top: 68px; /* fixed headerの高さ分 */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--navy);
+}
+
+.hero-atm {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 90% at 55% 40%, rgba(23,86,200,.3) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 5% 85%,  rgba(191,148,34,.1) 0%, transparent 55%),
+    linear-gradient(165deg, #0C1C35 0%, #060E1D 100%);
+}
+.hero-grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 90px 90px;
+}
+.hero-vbar {
+  position: absolute;
+  left: 5vw; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 5%, rgba(191,148,34,.45) 30%,
+    rgba(191,148,34,.45) 70%, transparent 95%);
+}
+
+.hero-body {
+  position: relative; z-index: 2;
+  padding: 0 5vw 7vh;
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 1rem; font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 13px;
+  margin-bottom: 1.4rem;
+  opacity: 0;
+  animation: fadeUp .8s .2s var(--ease) forwards;
+}
+.hero-tag::before {
+  content: '';
+  width: 36px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ★ Headline — ATHLETE CAREER と × SPORTS EDUCATION を同一スタイルで統一 */
+.hero-h1 {
+  font-family: var(--mono);
+  font-size: clamp(2.4rem, 5.5vw, 6rem);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.025em;
+  color: var(--white);
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  animation: fadeUp .9s .35s var(--ease) forwards;
+}
+.hero-h1 .hl-sub {
+  display: block;
+  color: var(--white);
+  font-size: 1em;
+  font-weight: 900;
+  letter-spacing: -.025em;
+  margin-top: .05em;
+}
+
+.hero-tagline {
+  font-size: .92rem; font-weight: 300;
+  line-height: 1.95;
+  color: rgba(255,255,255,.52);
+  max-width: 440px;
+  padding-left: 1.3rem;
+  border-left: 2px solid rgba(191,148,34,.45);
+  margin-bottom: 2.8rem;
+  opacity: 0;
+  animation: fadeUp .9s .5s var(--ease) forwards;
+}
+
+.hero-btns {
+  display: flex; gap: .9rem; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp .9s .65s var(--ease) forwards;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem; right: 5vw;
+  z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 7px;
+  opacity: 0;
+  animation: fadeIn .8s 1.2s forwards;
+}
+.sc-word {
+  font-family: var(--mono);
+  font-size: .52rem; font-weight: 600;
+  letter-spacing: .28em;
+  color: rgba(255,255,255,.28);
+  writing-mode: vertical-lr;
+}
+.sc-bar {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(191,148,34,.65), transparent);
+  animation: barDrop 2.2s ease-in-out infinite;
+}
+@keyframes barDrop {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─────────────────────────────────────
+   BUTTONS
+───────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono);
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 13px 32px;
+  transition: background .25s, color .25s, transform .2s, box-shadow .25s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-white  { background: var(--white); color: var(--navy); }
+.btn-white:hover  { box-shadow: 0 8px 22px rgba(0,0,0,.18); }
+.btn-ghost  { background: transparent; color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.28); }
+.btn-ghost:hover  { color: var(--white); border-color: rgba(255,255,255,.55); }
+.btn-navy   { background: var(--navy); color: var(--white); }
+.btn-navy:hover   { background: #0e2040; box-shadow: 0 8px 22px rgba(12,28,53,.28); }
+
+/* ═══════════════════════════════════════════
+   ② TOPICS
+═══════════════════════════════════════════ */
+#topics {
+  background: var(--white);
+  padding: 120px 0;
+}
+.topics-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 52px;
+  flex-wrap: wrap; gap: 1rem;
+}
+.link-all {
+  font-family: var(--mono);
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--blue);
+  display: inline-flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--blue);
+  padding-bottom: 2px;
+  transition: gap .25s;
+}
+.link-all:hover { gap: 14px; }
+
+.news-list { border-top: 1px solid var(--border); }
+.news-row {
+  display: grid;
+  grid-template-columns: 140px 140px 1fr 24px;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background .22s;
+}
+.news-row:hover { background: var(--bg); margin: 0 -2rem; padding: 2rem; }
+.news-row:hover .nr-arrow { opacity: 1; transform: none; }
+
+.nr-date {
+  font-family: var(--mono);
+  font-size: .68rem; font-weight: 500;
+  letter-spacing: .08em; color: var(--text-3);
+}
+.nr-cat {
+  font-family: var(--mono);
+  font-size: .55rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 4px 10px;
+  display: inline-block;
+  background: var(--bg-alt); color: var(--text-3);
+}
+.nr-cat.c-school  { background: var(--blue-pale); color: var(--blue); }
+.nr-cat.c-career  { background: #e7f5ec; color: #286a3a; }
+.nr-cat.c-company { background: #f2ece6; color: #6a4020; }
+.nr-title { font-size: .88rem; font-weight: 400; line-height: 1.65; color: var(--text-1); }
+.nr-arrow { font-size: .75rem; color: var(--text-4); opacity: 0; transform: translateX(-6px); transition: opacity .22s, transform .22s; }
+
+/* ═══════════════════════════════════════════
+   ③ 企業情報  &  ④ 事業内容
+   Panasonic カードリンクスタイル
+═══════════════════════════════════════════ */
+#about, #business { padding: 120px 0; }
+#about    { background: var(--bg); }
+#business { background: var(--white); }
+
+.panel-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 52px;
+  flex-wrap: wrap; gap: 1rem;
+}
+.panel-hdr-right {
+  font-size: .82rem; font-weight: 300;
+  line-height: 1.9; color: var(--text-3);
+  max-width: 300px;
+}
+
+.panel-grid { display: grid; gap: 2px; }
+.panel-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+
+/* Card */
+.panel-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--dark-2);
+  display: block;
+  cursor: pointer;
+}
+.panel-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  border: 2px solid transparent;
+  transition: border-color .35s;
+  pointer-events: none;
+  z-index: 4;
+}
+.panel-card:hover::after { border-color: var(--gold); }
+
+.pc-bg { position: absolute; inset: 0; transition: transform .7s var(--ease); }
+.panel-card:hover .pc-bg { transform: scale(1.04); }
+
+.pc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(8,8,8,.92) 0%, rgba(8,8,8,.55) 45%,
+    rgba(8,8,8,.12) 80%, transparent 100%);
+  z-index: 2;
+  transition: opacity .35s;
+}
+.panel-card:hover .pc-overlay { opacity: .78; }
+
+/* Copy */
+.pc-copy {
+  position: relative; z-index: 3;
+  padding: 2.8rem 2.6rem;
+  display: flex; flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.pc-en {
+  font-family: var(--mono);
+  font-size: .58rem; font-weight: 700;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 9px;
+  margin-bottom: .9rem;
+}
+.pc-en::before { content: ''; width: 16px; height: 1px; background: var(--gold); }
+
+.pc-title-jp {
+  font-size: 1.05rem; font-weight: 500;
+  color: var(--white);
+  line-height: 1.55;
+  margin-bottom: .6rem;
+}
+.pc-title-en {
+  font-family: var(--mono);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -.01em;
+  line-height: .92;
+  color: var(--white);
+  margin-bottom: 1.4rem;
+  transition: color .3s;
+}
+.panel-card:hover .pc-title-en { color: rgba(255,255,255,.85); }
+
+/* ★ READ MORE — 大きめサイズ */
+.pc-read {
+  font-family: var(--mono);
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--white);
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1.5px solid rgba(255,255,255,.35);
+  transition: gap .3s, border-color .3s, color .3s;
+  margin-top: .5rem;
+}
+.panel-card:hover .pc-read { gap: 18px; border-color: var(--gold); color: var(--gold); }
+
+.panel-card.h-tall { min-height: 500px; }
+
+/* Card backgrounds — About */
+.pc-bg-about-1 {
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 25%, rgba(23,86,200,.22) 0%, transparent 65%),
+    linear-gradient(155deg, #0a1628 0%, #111c2e 100%);
+}
+.pc-bg-about-2 {
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 25%, rgba(191,148,34,.18) 0%, transparent 65%),
+    linear-gradient(155deg, #18110a 0%, #111111 100%);
+}
+
+/* Card backgrounds — Business */
+.pc-bg-biz-1 {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(23,86,200,.28) 0%, transparent 60%),
+    linear-gradient(150deg, #060e1c 0%, #0d1525 100%);
+}
+.pc-bg-biz-2 {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(191,148,34,.2) 0%, transparent 60%),
+    linear-gradient(150deg, #150e02 0%, #0f0d08 100%);
+}
+
+/* SVG deco */
+.pc-deco {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: .055;
+  pointer-events: none;
+}
+
+/* Tags */
+.pc-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+.ptag {
+  font-family: var(--mono);
+  font-size: .55rem; font-weight: 600;
+  letter-spacing: .1em;
+  padding: 3px 9px;
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.45);
+}
+
+/* ═══════════════════════════════════════════
+   ⑤ SNS
+═══════════════════════════════════════════ */
+#sns { background: var(--bg); padding: 120px 0; }
+
+.sns-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 52px;
+  flex-wrap: wrap; gap: 1rem;
+}
+
+.sns-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+/* Instagram featured */
+.sns-ig {
+  background: var(--navy);
+  padding: 3.5rem;
+  display: flex; flex-direction: column;
+  gap: 1.4rem;
+  min-height: 320px;
+  justify-content: center;
+}
+.sns-ig-top { display: flex; align-items: center; gap: 1.2rem; }
+.sns-ig-icon {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sns-ig-icon svg { width: 20px; height: 20px; fill: rgba(255,255,255,.7); }
+.sns-ig-handle { font-family: var(--mono); font-size: .95rem; font-weight: 700; letter-spacing: .08em; color: var(--white); }
+.sns-ig-platform { font-family: var(--mono); font-size: .58rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+.sns-ig-text { font-size: .85rem; font-weight: 300; line-height: 1.9; color: rgba(255,255,255,.5); max-width: 380px; }
+.sns-ig-btn {
+  font-family: var(--mono);
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(191,148,34,.4);
+  padding: 10px 22px;
+  display: inline-flex; align-items: center; gap: 8px;
+  align-self: flex-start;
+  transition: background .25s, gap .25s;
+}
+.sns-ig-btn:hover { background: rgba(191,148,34,.08); gap: 14px; }
+
+/* Other platforms */
+.sns-other { display: grid; grid-template-columns: 1fr; gap: 2px; }
+.sns-platform {
+  background: var(--white);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .8rem;
+  padding: 2.5rem;
+  min-height: 155px;
+  border: 1px solid var(--border);
+  transition: background .25s, border-color .25s;
+  cursor: pointer;
+}
+.sns-platform:hover { background: var(--bg-alt); border-color: var(--border-md); }
+.sns-platform svg { width: 26px; height: 26px; fill: var(--text-3); transition: fill .25s; }
+.sns-platform:hover svg { fill: var(--text-1); }
+.sns-platform-name {
+  font-family: var(--mono);
+  font-size: .6rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text-3);
+}
+.sns-platform:hover .sns-platform-name { color: var(--text-1); }
+
+/* ═══════════════════════════════════════════
+   CONTACT BAND
+═══════════════════════════════════════════ */
+#contact { background: var(--navy); padding: 90px 0; }
+.contact-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; gap: 2.5rem;
+}
+.contact-left h2 {
+  font-family: var(--mono);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-weight: 900; letter-spacing: -.01em;
+  line-height: .95; color: var(--white);
+  margin-bottom: .8rem;
+}
+.contact-left p { font-size: .85rem; font-weight: 300; color: rgba(255,255,255,.42); }
+
+/* ═══════════════════════════════════════════
+   ⑥ FOOTER（会社署名）
+═══════════════════════════════════════════ */
+#site-footer { background: var(--dark); padding: 72px 0 36px; }
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 2.2rem;
+}
+.foot-brand-name { font-family: var(--mono); font-size: 1.35rem; font-weight: 800; letter-spacing: .2em; color: var(--white); margin-bottom: .45rem; }
+.foot-brand-jp   { font-size: .75rem; font-weight: 300; color: rgba(255,255,255,.3); margin-bottom: 1.3rem; }
+.foot-tagline    { font-size: .75rem; font-weight: 300; line-height: 1.9; color: rgba(255,255,255,.28); margin-bottom: 1.8rem; }
+
+.foot-socials { display: flex; gap: .5rem; }
+.fsoc {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .25s, background .25s;
+}
+.fsoc:hover { border-color: var(--gold); background: rgba(191,148,34,.07); }
+.fsoc svg { width: 13px; height: 13px; fill: rgba(255,255,255,.38); transition: fill .25s; }
+.fsoc:hover svg { fill: var(--gold); }
+
+.foot-col h4 {
+  font-family: var(--mono);
+  font-size: .55rem; font-weight: 700;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.22);
+  margin-bottom: 1.2rem;
+}
+.foot-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+.foot-col a { font-size: .78rem; font-weight: 300; color: rgba(255,255,255,.38); transition: color .2s; }
+.foot-col a:hover { color: var(--white); }
+
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.foot-copy  { font-family: var(--mono); font-size: .6rem; font-weight: 400; letter-spacing: .06em; color: rgba(255,255,255,.18); }
+.foot-badge { font-family: var(--mono); font-size: .6rem; font-weight: 700; letter-spacing: .26em; color: rgba(191,148,34,.28); }
+
+/* ─────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
+@media (max-width: 960px) {
+  .nav-list, .hdr-cta { display: none; }
+  .panel-grid.cols-2  { grid-template-columns: 1fr; }
+  .panel-card.h-tall  { min-height: 360px; }
+  .sns-layout         { grid-template-columns: 1fr; }
+  .foot-grid          { grid-template-columns: 1fr 1fr; }
+  .news-row           { grid-template-columns: 110px 1fr; }
+  .nr-cat, .nr-arrow  { display: none; }
+}
+@media (max-width: 600px) {
+  #hero            { height: 72vh; }
+  .hero-h1         { font-size: 2.4rem; }
+  .sns-other       { grid-template-columns: 1fr; }
+  .foot-grid       { grid-template-columns: 1fr; }
+}
+
+</style>
+
+<style id="page-css-about" disabled>
+
+:root {
+  --white:#FFFFFF;--bg:#F6F6F4;--bg-alt:#EFEFED;--border:#E2E2E0;--border-md:#C8C8C6;
+  --text-1:#0F0F0F;--text-2:#3C3C3C;--text-3:#787878;--text-4:#ADADAD;
+  --navy:#0C1C35;--blue:#1756C8;--blue-pale:#E6EEFB;--gold:#BF9422;
+  --dark:#0F0F0F;--dark-2:#181818;
+  --mono:'Montserrat',sans-serif;--jp:'Noto Sans JP',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;font-family:var(--jp);background:var(--white);color:var(--text-1);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1140px;margin:0 auto;padding:0 5vw;}
+
+.rev{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.rev.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* ══ HEADER ══ */
+#site-header{position:fixed;inset:0 0 auto 0;height:68px;z-index:900;display:flex;align-items:stretch;background:rgba(12,28,53,.95);backdrop-filter:blur(12px);transition:background .4s var(--ease),box-shadow .4s;}
+#site-header.solid{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--border);}
+.hdr-inner{width:100%;max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;}
+.logo-img{height:40px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(0,0,0,.5));transition:opacity .3s;}
+.logo-img:hover{opacity:.85;}
+#site-header.solid .logo-img{filter:drop-shadow(0 1px 3px rgba(0,0,0,.2));}
+.nav-list{display:flex;gap:2.2rem;list-style:none;}
+.nav-list a{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;transition:color .25s;}
+.nav-list a::after{content:'';position:absolute;bottom:-3px;left:0;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease);}
+.nav-list a:hover{color:var(--white);}.nav-list a:hover::after,.nav-list a.current::after{width:100%;}
+#site-header.solid .nav-list a{color:var(--text-3);}
+#site-header.solid .nav-list a:hover{color:var(--text-1);}
+.nav-list a.current{color:var(--gold);}
+.hdr-cta{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:9px 22px;transition:background .25s,transform .2s;}
+.hdr-cta:hover{background:#ceaa38;transform:translateY(-1px);}
+
+/* ══ PAGE HERO ══ */
+#page-hero{min-height:320px;padding-top:68px;background:radial-gradient(ellipse 70% 90% at 60% 50%,rgba(23,86,200,.25) 0%,transparent 65%),linear-gradient(165deg,#0C1C35 0%,#060E1D 100%);display:flex;flex-direction:column;justify-content:flex-end;position:relative;}
+.page-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:90px 90px;}
+.page-hero-vbar{position:absolute;left:5vw;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 5%,rgba(191,148,34,.4) 30%,rgba(191,148,34,.4) 70%,transparent 95%);}
+/* 背景薄いRELONISロゴ */
+.page-hero-wordmark{position:absolute;right:-2vw;bottom:-1rem;font-family:var(--mono);font-size:clamp(6rem,16vw,14rem);font-weight:900;letter-spacing:-.02em;color:rgba(255,255,255,.035);pointer-events:none;white-space:nowrap;line-height:1;}
+.page-hero-body{position:relative;z-index:2;padding:0 5vw 3.5rem;max-width:1140px;margin:0 auto;width:100%;}
+.page-breadcrumb{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.page-breadcrumb a{color:rgba(255,255,255,.35);transition:color .2s;}.page-breadcrumb a:hover{color:var(--gold);}
+.page-breadcrumb span{color:var(--gold);}
+.page-title{font-family:var(--mono);font-size:clamp(2.4rem,5vw,5rem);font-weight:900;letter-spacing:-.02em;line-height:.9;color:var(--white);}
+
+.page-title-suffix{font-size:clamp(1rem,2vw,1.6rem);font-weight:400;letter-spacing:.05em;color:rgba(255,255,255,.6);display:block;margin-top:.5rem;}
+.page-title-jp{font-size:1rem;font-weight:300;color:rgba(255,255,255,.5);margin-top:.8rem;letter-spacing:.06em;}
+
+/* ══ PAGE ANCHOR NAV ══ */
+#page-nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:800;}
+.page-nav-inner{max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;gap:0;overflow-x:auto;}
+.page-nav-link{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);padding:1.1rem 1.6rem;border-bottom:2px solid transparent;transition:color .25s,border-color .25s;white-space:nowrap;}
+.page-nav-link:hover{color:var(--navy);border-bottom-color:var(--navy);}
+.page-nav-link.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+/* ══ SEC LABELS ══ */
+.sec-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:var(--border-md);flex-shrink:0;}
+.sec-label.blue-lbl{color:var(--blue);}.sec-label.blue-lbl::before{background:var(--blue);}
+.sec-label.gold-lbl{color:var(--gold);}.sec-label.gold-lbl::before{background:var(--gold);}
+.sec-h2{font-family:var(--mono);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:.92;color:var(--text-1);margin-bottom:2.5rem;}
+
+/* ══════════════════════════════
+   ① 経営理念
+   背景に薄いRELONISロゴ
+══════════════════════════════ */
+#keieirinen{background:var(--white);padding:100px 0;position:relative;overflow:hidden;}
+#keieirinen::before{
+  content:'RELONIS';
+  position:absolute;right:-2vw;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:clamp(8rem,18vw,18rem);font-weight:900;
+  letter-spacing:-.02em;color:rgba(0,0,0,.028);pointer-events:none;
+  white-space:nowrap;line-height:1;
+}
+
+.rinen-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:3.5rem;}
+.rinen-card{background:var(--bg);padding:2.6rem 2.8rem;transition:background .25s;}
+.rinen-card:hover{background:var(--bg-alt);}
+.rinen-card-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;display:flex;align-items:center;gap:8px;}
+.rinen-card-label::before{content:'';width:16px;height:1.5px;background:var(--gold);flex-shrink:0;}
+/* 大項目 */
+.rinen-card-main{font-size:1.35rem;font-weight:700;color:var(--navy);line-height:1.6;margin-bottom:1.6rem;padding-bottom:1.3rem;border-bottom:2px solid var(--border);}
+/* 中項目：wrapper で左ボーダーを1本に */
+.rinen-card-subs{border-left:3px solid var(--gold);padding-left:1.1rem;display:flex;flex-direction:column;gap:.85rem;}
+.rinen-card-sub{font-size:1rem;font-weight:400;line-height:1.9;color:var(--text-2);}
+
+/* ── 行動指針：アコーディオン式 ── */
+.conduct-header{margin-bottom:2.5rem;}
+.conduct-lead{font-size:1.1rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:12px;margin-bottom:1.2rem;}
+.conduct-lead::before{content:'';width:28px;height:2px;background:var(--blue);flex-shrink:0;}
+.conduct-desc{font-size:.9rem;font-weight:300;line-height:2;color:var(--text-2);}
+
+/* カードグリッド */
+.conduct-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:0;min-width:0;}
+.conduct-card{
+  background:var(--bg);border:none;cursor:pointer;
+  padding:1.8rem .8rem 1.4rem;
+  display:flex;flex-direction:column;align-items:center;gap:.7rem;
+  transition:background .25s;
+  font-family:inherit;
+  border-bottom:3px solid transparent;
+  position:relative;
+}
+.conduct-card:hover{background:var(--bg-alt);}
+.conduct-card.active{background:var(--navy);border-bottom-color:var(--gold);}
+.conduct-card-num{font-family:var(--mono);font-size:1.8rem;font-weight:900;color:rgba(191,148,34,.35);line-height:1;transition:color .25s;}
+.conduct-card.active .conduct-card-num{color:var(--gold);}
+.conduct-card-q{font-size:.82rem;font-weight:600;color:var(--navy);line-height:1.5;text-align:center;transition:color .25s;}
+.conduct-card.active .conduct-card-q{color:var(--white);}
+.conduct-card-hint{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.08em;color:var(--blue);margin-top:.2rem;transition:color .25s;}
+.conduct-card.active .conduct-card-hint{color:var(--gold);}
+
+/* 展開パネル */
+.conduct-panel{
+  display:none;
+  background:var(--navy);
+  padding:2.4rem 3rem;
+  position:relative;
+  margin-top:0;
+}
+.conduct-panel.open{display:block;}
+.conduct-panel-inner{display:flex;align-items:flex-start;gap:2.4rem;max-width:900px;}
+.conduct-panel-num{font-family:var(--mono);font-size:4rem;font-weight:900;color:rgba(191,148,34,.25);line-height:1;flex-shrink:0;margin-top:-.3rem;}
+.conduct-panel-body{}
+.conduct-panel-q{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.9rem;line-height:1.5;}
+.conduct-panel-a{font-size:.9rem;font-weight:300;line-height:2;color:rgba(255,255,255,.7);}
+.conduct-panel-close{
+  position:absolute;top:1.2rem;right:1.6rem;
+  background:none;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.12em;
+  color:rgba(255,255,255,.4);transition:color .2s;
+}
+.conduct-panel-close:hover{color:var(--white);}
+
+/* ══════════════════════════════
+   ② トップメッセージ
+   背景に薄いRELONISロゴ
+══════════════════════════════ */
+#topmessage{background:var(--bg);padding:100px 0;position:relative;overflow:hidden;}
+#topmessage::before{
+  content:'MESSAGE';
+  position:absolute;left:-2vw;bottom:2rem;
+  font-family:var(--mono);font-size:clamp(6rem,14vw,14rem);font-weight:900;
+  letter-spacing:-.02em;color:rgba(0,0,0,.025);pointer-events:none;
+  white-space:nowrap;line-height:1;
+}
+
+/* 各人物の箱 */
+.message-block{
+  background:var(--white);
+  margin-bottom:3px;
+  display:grid;
+  grid-template-columns:320px 1fr;
+  align-items:stretch;
+}
+.message-block:last-of-type{margin-bottom:0;}
+
+/* 左：写真エリア — 写真全体を表示 */
+.msg-photo-col{position:relative;display:flex;flex-direction:column;}
+.msg-photo-col img{
+  width:100%;
+  height:auto;        /* ← 縦を自動にして全体表示 */
+  display:block;
+  object-fit:contain;
+  object-position:top;
+}
+.msg-photo-label{
+  background:var(--navy);padding:1.2rem 1.6rem;
+  flex-shrink:0;
+}
+.msg-name{font-size:1.05rem;font-weight:600;color:var(--white);margin-bottom:.25rem;}
+.msg-role{font-family:var(--mono);font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+
+/* 右：テキストエリア */
+.msg-text-col{padding:3rem 3.5rem;display:flex;flex-direction:column;justify-content:flex-start;}
+.msg-subtitle{font-size:1.05rem;font-weight:600;line-height:1.7;color:var(--navy);margin-bottom:1.6rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border);}
+.msg-body{font-size:.88rem;font-weight:300;line-height:2.1;color:var(--text-2);margin-bottom:1.3rem;}
+.msg-highlight{font-size:.88rem;font-weight:500;line-height:1.9;color:var(--navy);padding:1.2rem 1.6rem;border-left:3px solid var(--gold);background:var(--bg);margin:1.6rem 0;}
+/* 署名：本文と同フォント・同サイズに統一 */
+.msg-sig{margin-top:1.8rem;font-size:.88rem;font-weight:300;color:var(--text-2);line-height:2.1;}
+
+/* ══════════════════════════════
+   ③ 会社概要
+   背景に薄いRELONISロゴ
+══════════════════════════════ */
+#gaiyo{background:var(--white);padding:100px 0;position:relative;overflow:hidden;}
+#gaiyo::before{
+  content:'RELONIS';
+  position:absolute;right:-2vw;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:clamp(8rem,18vw,18rem);font-weight:900;
+  letter-spacing:-.02em;color:rgba(0,0,0,.028);pointer-events:none;
+  white-space:nowrap;line-height:1;
+}
+
+.company-table{width:100%;border-collapse:collapse;position:relative;z-index:1;}
+.company-table tr{border-bottom:1px solid var(--border);}
+.company-table th{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);padding:1.4rem 0;width:160px;text-align:left;vertical-align:top;}
+.company-table td{font-size:.9rem;font-weight:300;color:var(--text-2);padding:1.4rem 0 1.4rem 1.2rem;line-height:1.9;}
+
+/* ══ CONTACT BAND ══ */
+#contact-band{background:var(--navy);padding:80px 0;}
+.contact-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;}
+.contact-left h2{font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;letter-spacing:-.01em;line-height:.95;color:var(--white);margin-bottom:.7rem;}
+.contact-left p{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.42);}
+.btn-white{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 32px;background:var(--white);color:var(--navy);transition:box-shadow .25s,transform .2s;}
+.btn-white:hover{box-shadow:0 8px 22px rgba(0,0,0,.2);transform:translateY(-2px);}
+
+/* ══ FOOTER ══ */
+#site-footer{background:var(--dark);padding:64px 0 36px;}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:2rem;}
+.foot-brand-name{font-family:var(--mono);font-size:1.35rem;font-weight:800;letter-spacing:.2em;color:var(--white);margin-bottom:.4rem;}
+.foot-brand-jp{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+.foot-tagline{font-size:.75rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.25);margin-bottom:1.6rem;}
+.foot-socials{display:flex;gap:.5rem;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:border-color .25s,background .25s;}
+.fsoc:hover{border-color:var(--gold);background:rgba(191,148,34,.07);}
+.fsoc svg{width:13px;height:13px;fill:rgba(255,255,255,.38);transition:fill .25s;}
+.fsoc:hover svg{fill:var(--gold);}
+.foot-col h4{font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:1.1rem;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.foot-col a{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.38);transition:color .2s;}
+.foot-col a:hover{color:var(--white);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.foot-copy{font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.18);}
+.foot-badge{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.26em;color:rgba(191,148,34,.28);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  .nav-list,.hdr-cta{display:none;}
+  .rinen-grid{grid-template-columns:1fr;}
+  .conduct-grid{grid-template-columns:repeat(5,1fr);}
+  .message-block{grid-template-columns:1fr;}
+  .msg-photo-col img{width:100%;height:auto;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+  .conduct-panel{padding:1.8rem 1.6rem;}
+  .conduct-panel-num{font-size:2.5rem;}
+}
+@media(max-width:600px){
+  #page-hero{min-height:240px;}
+  .conduct-grid{grid-template-columns:repeat(5,1fr);}
+  .conduct-panel-inner{flex-direction:column;gap:1rem;}
+  .msg-text-col{padding:2rem 1.6rem;}
+  .foot-grid{grid-template-columns:1fr;}
+}
+
+</style>
+<style id="page-css-norn" disabled>
+
+:root{
+  --white:#FFFFFF;--bg:#F6F6F4;--bg-alt:#EFEFED;
+  --border:#E2E2E0;--border-md:#C8C8C6;
+  --text-1:#0F0F0F;--text-2:#3C3C3C;--text-3:#787878;
+  --navy:#0C1C35;--blue:#1756C8;--gold:#BF9422;--dark:#0F0F0F;
+  --mono:'Montserrat',sans-serif;--jp:'Noto Sans JP',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;
+  font-family:var(--jp);color:var(--text-1);overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  background-color:var(--white);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='120'%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Montserrat%2C sans-serif' font-size='28' font-weight='900' letter-spacing='4' fill='%230C1C35' fill-opacity='0.04' transform='rotate(-20%2C130%2C60)'%3ERELONIS%3C/text%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:260px 120px;
+}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1140px;margin:0 auto;padding:0 5vw;}
+.rev{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.rev.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* HEADER */
+#site-header{position:fixed;inset:0 0 auto 0;height:68px;z-index:900;display:flex;align-items:stretch;background:rgba(12,28,53,.95);backdrop-filter:blur(12px);transition:background .4s var(--ease),box-shadow .4s;}
+#site-header.solid{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--border);}
+.hdr-inner{width:100%;max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;}
+.logo-img{height:40px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(0,0,0,.5));transition:opacity .3s;}
+.logo-img:hover{opacity:.85;}
+#site-header.solid .logo-img{filter:drop-shadow(0 1px 3px rgba(0,0,0,.2));}
+.nav-list{display:flex;gap:2.2rem;list-style:none;}
+.nav-list a{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;transition:color .25s;}
+.nav-list a::after{content:'';position:absolute;bottom:-3px;left:0;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease);}
+.nav-list a:hover{color:var(--white);}.nav-list a:hover::after{width:100%;}
+#site-header.solid .nav-list a{color:var(--text-3);}
+#site-header.solid .nav-list a:hover{color:var(--text-1);}
+.nav-list a.current{color:var(--gold);}.nav-list a.current::after{width:100%;}
+.hdr-cta{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:9px 22px;transition:background .25s,transform .2s;}
+.hdr-cta:hover{background:#ceaa38;transform:translateY(-1px);}
+
+/* PAGE HERO */
+#page-hero{min-height:320px;padding-top:68px;background:radial-gradient(ellipse 70% 90% at 60% 50%,rgba(23,86,200,.25) 0%,transparent 65%),linear-gradient(165deg,#0C1C35 0%,#060E1D 100%);display:flex;flex-direction:column;justify-content:flex-end;position:relative;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:90px 90px;}
+.hero-vbar{position:absolute;left:5vw;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 5%,rgba(191,148,34,.4) 30%,rgba(191,148,34,.4) 70%,transparent 95%);}
+.page-hero-body{position:relative;z-index:2;padding:0 5vw 3.5rem;max-width:1140px;margin:0 auto;width:100%;}
+.breadcrumb{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.breadcrumb a{color:rgba(255,255,255,.35);transition:color .2s;}.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--gold);}
+.page-title{font-family:var(--mono);font-size:clamp(2.4rem,5vw,5rem);font-weight:900;letter-spacing:-.02em;line-height:.9;color:var(--white);}
+.page-title-sub{font-family:var(--mono);font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.9rem;}
+.page-title-jp{font-size:1rem;font-weight:400;color:rgba(255,255,255,.65);margin-top:.4rem;letter-spacing:.04em;}
+
+/* PAGE NAV */
+#page-nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:800;}
+.page-nav-inner{max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;overflow-x:auto;}
+.pnav-link{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);padding:1.1rem 1.6rem;border-bottom:2px solid transparent;transition:color .25s,border-color .25s;white-space:nowrap;}
+.pnav-link:hover{color:var(--navy);border-bottom-color:var(--navy);}
+.pnav-link.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+/* LABELS */
+.sec-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:var(--border-md);flex-shrink:0;}
+.sec-label.bl{color:var(--blue);}.sec-label.bl::before{background:var(--blue);}
+.sec-label.gd{color:var(--gold);}.sec-label.gd::before{background:var(--gold);}
+.sec-label.wh{color:rgba(255,255,255,.5);}.sec-label.wh::before{background:rgba(255,255,255,.3);}
+.sec-h2{font-family:var(--mono);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:.92;color:var(--text-1);margin-bottom:2.5rem;}
+.sec-h2.on-dark{color:var(--white);}
+
+/* ① MISSION */
+#mission{background:rgba(255,255,255,.88);padding:100px 0;}
+.mission-inner{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;}
+.mission-photo{aspect-ratio:4/3;overflow:hidden;background:var(--bg-alt);}
+.mission-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.mission-tag{font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;}
+.mission-tag::before{content:'';width:20px;height:1.5px;background:var(--gold);}
+.mission-title{font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:1.8rem;}
+.mission-body p{font-size:.9rem;font-weight:300;line-height:2;color:var(--text-2);margin-bottom:1.4rem;}
+.mission-body p:last-child{margin-bottom:0;}
+.service-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:2rem;}
+.service-list li{font-size:.88rem;font-weight:500;color:var(--navy);padding:.85rem 1.2rem .85rem 1rem;background:var(--bg);border-left:3px solid var(--gold);display:flex;align-items:center;gap:.8rem;transition:background .25s;}
+.service-list li:hover{background:var(--bg-alt);}
+.service-list li::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+
+/* ② 社会・企業の方へ */
+#for-society{background:rgba(246,246,244,.9);padding:100px 0;position:relative;overflow:hidden;}
+#for-society::before{content:'NORN';position:absolute;right:-1%;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:28vw;font-weight:900;color:rgba(12,28,53,.04);letter-spacing:-.02em;pointer-events:none;user-select:none;line-height:1;white-space:nowrap;}
+.society-inner{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start;}
+.society-lead{font-size:1.25rem;font-weight:700;color:var(--navy);line-height:1.55;margin-bottom:2rem;padding-bottom:1.6rem;border-bottom:1px solid var(--border);}
+.society-lead em{font-style:normal;color:var(--gold);}
+.society-body p{font-size:.9rem;font-weight:300;line-height:2.1;color:var(--text-2);margin-bottom:1.4rem;}
+.society-body p:last-child{margin-bottom:0;}
+.strength-grid{display:flex;flex-direction:column;gap:2px;}
+.strength-card{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.8rem 2rem;display:flex;align-items:flex-start;gap:1.2rem;transition:background .25s,box-shadow .25s;}
+.strength-card:hover{background:var(--bg);box-shadow:0 2px 12px rgba(12,28,53,.07);}
+.strength-icon{width:40px;height:40px;background:rgba(191,148,34,.1);border:1px solid rgba(191,148,34,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.strength-icon svg{width:18px;height:18px;fill:var(--gold);}
+.strength-title{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:.4rem;line-height:1.4;}
+.strength-desc{font-size:.78rem;font-weight:300;color:var(--text-2);line-height:1.8;}
+
+/* ③ アスリートの方へ */
+#for-athlete{background:rgba(255,255,255,.88);padding:100px 0;position:relative;overflow:hidden;}
+#for-athlete::before{content:'ATHLETE';position:absolute;right:-1%;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16vw;font-weight:900;color:rgba(12,28,53,.04);letter-spacing:-.02em;pointer-events:none;user-select:none;line-height:1;white-space:nowrap;}
+.athlete-inner{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;}
+.athlete-photo{aspect-ratio:4/3;overflow:hidden;background:var(--bg-alt);}
+.athlete-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.athlete-lead{font-size:1.15rem;font-weight:700;color:var(--navy);line-height:1.6;margin-bottom:1.8rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border);}
+.athlete-body p{font-size:.9rem;font-weight:300;line-height:2;color:var(--text-2);margin-bottom:1.4rem;}
+.athlete-body p:last-child{margin-bottom:0;}
+/* promise は箱なし・通常テキスト */
+.athlete-promise{margin-top:1.4rem;}
+.athlete-promise p{font-size:.9rem;font-weight:400;line-height:2;color:var(--text-2);}
+.athlete-promise p strong{color:var(--navy);font-weight:600;}
+
+/* ④ お問い合わせ */
+#contact-section{background:rgba(255,255,255,.88);padding:100px 0;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start;}
+.contact-intro p{font-size:.9rem;font-weight:300;line-height:2;color:var(--text-2);margin-bottom:1.2rem;}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem;}
+.form-group{display:flex;flex-direction:column;gap:.5rem;}
+.form-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);}
+.form-label span{color:#c0392b;margin-left:4px;}
+.form-input,.form-textarea{font-family:var(--jp);font-size:.88rem;font-weight:300;color:var(--text-1);background:var(--bg);border:1px solid var(--border);padding:.9rem 1.1rem;outline:none;transition:border-color .25s,background .25s;width:100%;}
+.form-input:focus,.form-textarea:focus{border-color:var(--blue);background:var(--white);}
+.form-textarea{resize:vertical;min-height:140px;line-height:1.8;}
+.form-submit{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:14px 36px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:9px;align-self:flex-start;transition:background .25s,transform .2s;}
+.form-submit:hover{background:#ceaa38;transform:translateY(-1px);}
+
+/* CONTACT BAND */
+#contact-band{background:var(--navy);padding:80px 0;}
+.contact-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;}
+.contact-left h2{font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;letter-spacing:-.01em;line-height:.95;color:var(--white);margin-bottom:.7rem;}
+.contact-left p{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.42);}
+.btn-white{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 32px;background:var(--white);color:var(--navy);transition:box-shadow .25s,transform .2s;}
+.btn-white:hover{box-shadow:0 8px 22px rgba(0,0,0,.2);transform:translateY(-2px);}
+
+/* FOOTER */
+#site-footer{background:var(--dark);padding:64px 0 36px;}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:2rem;}
+.foot-brand-name{font-family:var(--mono);font-size:1.35rem;font-weight:800;letter-spacing:.2em;color:var(--white);margin-bottom:.4rem;}
+.foot-brand-jp{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+.foot-tagline{font-size:.75rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.25);margin-bottom:1.6rem;}
+.foot-socials{display:flex;gap:.5rem;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:border-color .25s,background .25s;}
+.fsoc:hover{border-color:var(--gold);background:rgba(191,148,34,.07);}
+.fsoc svg{width:13px;height:13px;fill:rgba(255,255,255,.38);transition:fill .25s;}
+.fsoc:hover svg{fill:var(--gold);}
+.foot-col h4{font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:1.1rem;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.foot-col a{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.38);transition:color .2s;}
+.foot-col a:hover{color:var(--white);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.foot-copy{font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.18);}
+.foot-badge{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.26em;color:rgba(191,148,34,.28);}
+
+@media(max-width:960px){
+  .nav-list,.hdr-cta{display:none;}
+  .mission-inner,.society-inner,.athlete-inner,.contact-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  #page-hero{min-height:240px;}
+  .foot-grid{grid-template-columns:1fr;}
+}
+
+</style>
+<style id="page-css-recruit" disabled>
+
+:root {
+  --white:#FFFFFF; --bg:#F6F6F4; --bg-alt:#EFEFED;
+  --border:#E2E2E0; --border-md:#C8C8C6;
+  --text-1:#0F0F0F; --text-2:#3C3C3C; --text-3:#787878;
+  --navy:#0C1C35; --blue:#1756C8; --gold:#BF9422; --dark:#0F0F0F;
+  --mono:'Montserrat',sans-serif; --jp:'Noto Sans JP',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;
+  font-family:var(--jp);color:var(--text-1);overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  background-color:var(--white);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='120'%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Montserrat%2C sans-serif' font-size='28' font-weight='900' letter-spacing='4' fill='%230C1C35' fill-opacity='0.04' transform='rotate(-20%2C130%2C60)'%3ERELONIS%3C/text%3E%3C/svg%3E");
+  background-repeat:repeat;
+  background-size:260px 120px;
+}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1140px;margin:0 auto;padding:0 5vw;}
+.rev{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.rev.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s;} .d2{transition-delay:.2s;}
+
+/* HEADER */
+#site-header{position:fixed;inset:0 0 auto 0;height:68px;z-index:900;display:flex;align-items:stretch;background:rgba(12,28,53,.95);backdrop-filter:blur(12px);transition:background .4s var(--ease),box-shadow .4s;}
+#site-header.solid{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--border);}
+.hdr-inner{width:100%;max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;}
+.logo-img{height:40px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(0,0,0,.5));transition:opacity .3s;}
+.logo-img:hover{opacity:.85;}
+#site-header.solid .logo-img{filter:drop-shadow(0 1px 3px rgba(0,0,0,.2));}
+.nav-list{display:flex;gap:2.2rem;list-style:none;}
+.nav-list a{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;transition:color .25s;}
+.nav-list a::after{content:'';position:absolute;bottom:-3px;left:0;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease);}
+.nav-list a:hover{color:var(--white);} .nav-list a:hover::after{width:100%;}
+#site-header.solid .nav-list a{color:var(--text-3);}
+#site-header.solid .nav-list a:hover{color:var(--text-1);}
+.nav-list a.current{color:var(--gold);} .nav-list a.current::after{width:100%;}
+.hdr-cta{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:9px 22px;transition:background .25s,transform .2s;}
+.hdr-cta:hover{background:#ceaa38;transform:translateY(-1px);}
+
+/* PAGE HERO */
+#page-hero{min-height:320px;padding-top:68px;background:radial-gradient(ellipse 70% 90% at 60% 50%,rgba(23,86,200,.25) 0%,transparent 65%),linear-gradient(165deg,#0C1C35 0%,#060E1D 100%);display:flex;flex-direction:column;justify-content:flex-end;position:relative;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:90px 90px;}
+.hero-vbar{position:absolute;left:5vw;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 5%,rgba(191,148,34,.4) 30%,rgba(191,148,34,.4) 70%,transparent 95%);}
+.page-hero-body{position:relative;z-index:2;padding:0 5vw 3.5rem;max-width:1140px;margin:0 auto;width:100%;}
+.breadcrumb{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.breadcrumb a{color:rgba(255,255,255,.35);} .breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--gold);}
+.page-title{font-family:var(--mono);font-size:clamp(2.4rem,5vw,5rem);font-weight:900;letter-spacing:-.02em;line-height:.9;color:var(--white);}
+.page-title-jp{font-size:1rem;font-weight:400;color:rgba(255,255,255,.65);margin-top:.5rem;letter-spacing:.04em;}
+
+/* LABELS */
+.sec-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:var(--border-md);flex-shrink:0;}
+.sec-label.bl{color:var(--blue);} .sec-label.bl::before{background:var(--blue);}
+.sec-label.gd{color:var(--gold);} .sec-label.gd::before{background:var(--gold);}
+.sec-h2{font-family:var(--mono);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:.92;color:var(--text-1);margin-bottom:2.5rem;}
+
+/* RECRUIT SECTION */
+#recruit{background:rgba(255,255,255,.88);padding:100px 0;min-height:60vh;}
+
+/* 現在募集なし カード */
+.recruit-status-card{
+  background:rgba(246,246,244,.97);
+  border:1px solid var(--border);
+  border-top:4px solid var(--gold);
+  padding:3.5rem 4rem;
+  max-width:680px;
+  margin-bottom:3rem;
+}
+.recruit-status-badge{
+  font-family:var(--mono);
+  font-size:.62rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--navy);
+  background:rgba(191,148,34,.1);
+  border:1px solid rgba(191,148,34,.3);
+  padding:5px 14px;
+  display:inline-block;
+  margin-bottom:1.8rem;
+}
+.recruit-status-title{
+  font-size:1.5rem;font-weight:700;
+  color:var(--navy);line-height:1.4;
+  margin-bottom:1.6rem;
+}
+.recruit-status-body p{
+  font-size:.92rem;font-weight:300;
+  line-height:2.1;color:var(--text-2);
+  margin-bottom:.8rem;
+}
+.recruit-status-body p:last-child{margin-bottom:0;}
+
+/* メッセージカード */
+.recruit-appeal{
+  max-width:680px;
+  padding:2.8rem 3rem;
+  background:var(--navy);
+  position:relative;overflow:hidden;
+}
+.recruit-appeal::before{
+  content:'JOIN US';
+  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:7rem;font-weight:900;
+  color:rgba(255,255,255,.04);letter-spacing:-.02em;
+  pointer-events:none;user-select:none;white-space:nowrap;
+}
+.recruit-appeal-lbl{
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:10px;
+}
+.recruit-appeal-lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.recruit-appeal-text{
+  font-size:.9rem;font-weight:300;line-height:2;
+  color:rgba(255,255,255,.7);
+}
+
+/* CONTACT */
+#contact-band{background:var(--navy);padding:80px 0;}
+.contact-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;}
+.contact-left h2{font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;letter-spacing:-.01em;line-height:.95;color:var(--white);margin-bottom:.7rem;}
+.contact-left p{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.42);}
+.btn-white{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 32px;background:var(--white);color:var(--navy);transition:box-shadow .25s,transform .2s;}
+.btn-white:hover{box-shadow:0 8px 22px rgba(0,0,0,.2);transform:translateY(-2px);}
+
+/* FOOTER */
+#site-footer{background:var(--dark);padding:64px 0 36px;}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:2rem;}
+.foot-brand-name{font-family:var(--mono);font-size:1.35rem;font-weight:800;letter-spacing:.2em;color:var(--white);margin-bottom:.4rem;}
+.foot-brand-jp{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+.foot-tagline{font-size:.75rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.25);margin-bottom:1.6rem;}
+.foot-socials{display:flex;gap:.5rem;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:border-color .25s,background .25s;}
+.fsoc:hover{border-color:var(--gold);background:rgba(191,148,34,.07);}
+.fsoc svg{width:13px;height:13px;fill:rgba(255,255,255,.38);transition:fill .25s;}
+.fsoc:hover svg{fill:var(--gold);}
+.foot-col h4{font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:1.1rem;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.foot-col a{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.38);transition:color .2s;}
+.foot-col a:hover{color:var(--white);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.foot-copy{font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.18);}
+.foot-badge{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.26em;color:rgba(191,148,34,.28);}
+
+@media(max-width:960px){
+  .nav-list,.hdr-cta{display:none;}
+  .recruit-status-card,.recruit-appeal{padding:2.4rem 2rem;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  #page-hero{min-height:240px;}
+  .foot-grid{grid-template-columns:1fr;}
+}
+
+</style>
+<style id="page-css-relath" disabled>
+
+:root{
+  --white:#FFFFFF;--bg:#F6F6F4;--bg-alt:#EFEFED;
+  --border:#E2E2E0;--border-md:#C8C8C6;
+  --text-1:#0F0F0F;--text-2:#3C3C3C;--text-3:#787878;
+  --navy:#0C1C35;--blue:#1756C8;--gold:#BF9422;--dark:#0F0F0F;
+  --mono:'Montserrat',sans-serif;--jp:'Noto Sans JP',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;
+  font-family:var(--jp);color:var(--text-1);overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  background-color:var(--white);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='120'%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Montserrat%2C sans-serif' font-size='28' font-weight='900' letter-spacing='4' fill='%230C1C35' fill-opacity='0.04' transform='rotate(-20%2C130%2C60)'%3ERELONIS%3C/text%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:260px 120px;
+}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1140px;margin:0 auto;padding:0 5vw;}
+.rev{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.rev.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* HEADER */
+#site-header{position:fixed;inset:0 0 auto 0;height:68px;z-index:900;display:flex;align-items:stretch;background:rgba(12,28,53,.95);backdrop-filter:blur(12px);transition:background .4s var(--ease),box-shadow .4s;}
+#site-header.solid{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--border);}
+.hdr-inner{width:100%;max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;}
+.logo-img{height:40px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(0,0,0,.5));transition:opacity .3s;}
+.logo-img:hover{opacity:.85;}
+#site-header.solid .logo-img{filter:drop-shadow(0 1px 3px rgba(0,0,0,.2));}
+.nav-list{display:flex;gap:2.2rem;list-style:none;}
+.nav-list a{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;transition:color .25s;}
+.nav-list a::after{content:'';position:absolute;bottom:-3px;left:0;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease);}
+.nav-list a:hover{color:var(--white);}.nav-list a:hover::after{width:100%;}
+#site-header.solid .nav-list a{color:var(--text-3);}
+#site-header.solid .nav-list a:hover{color:var(--text-1);}
+.nav-list a.current{color:var(--gold);}.nav-list a.current::after{width:100%;}
+.hdr-cta{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:9px 22px;transition:background .25s,transform .2s;}
+.hdr-cta:hover{background:#ceaa38;transform:translateY(-1px);}
+
+/* PAGE HERO */
+#page-hero{min-height:320px;padding-top:68px;background:radial-gradient(ellipse 70% 90% at 60% 50%,rgba(23,86,200,.25) 0%,transparent 65%),linear-gradient(165deg,#0C1C35 0%,#060E1D 100%);display:flex;flex-direction:column;justify-content:flex-end;position:relative;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:90px 90px;}
+.hero-vbar{position:absolute;left:5vw;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 5%,rgba(191,148,34,.4) 30%,rgba(191,148,34,.4) 70%,transparent 95%);}
+.page-hero-body{position:relative;z-index:2;padding:0 5vw 3.5rem;max-width:1140px;margin:0 auto;width:100%;}
+.breadcrumb{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.breadcrumb a{color:rgba(255,255,255,.35);transition:color .2s;}.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--gold);}
+.page-title{font-family:var(--mono);font-size:clamp(2.4rem,5vw,5rem);font-weight:900;letter-spacing:-.02em;line-height:.9;color:var(--white);}
+.page-title-sub{font-family:var(--mono);font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.9rem;}
+.page-title-jp{font-size:1rem;font-weight:400;color:rgba(255,255,255,.65);margin-top:.4rem;letter-spacing:.04em;}
+
+/* PAGE NAV */
+#page-nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:800;}
+.page-nav-inner{max-width:1140px;margin:0 auto;padding:0 5vw;display:flex;overflow-x:auto;}
+.pnav-link{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);padding:1.1rem 1.6rem;border-bottom:2px solid transparent;transition:color .25s,border-color .25s;white-space:nowrap;}
+.pnav-link:hover{color:var(--navy);border-bottom-color:var(--navy);}
+.pnav-link.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+/* LABELS */
+.sec-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:var(--border-md);flex-shrink:0;}
+.sec-label.bl{color:var(--blue);}.sec-label.bl::before{background:var(--blue);}
+.sec-label.gd{color:var(--gold);}.sec-label.gd::before{background:var(--gold);}
+.sec-h2{font-family:var(--mono);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:.92;color:var(--text-1);margin-bottom:2.5rem;}
+
+/* MISSION */
+#mission{background:rgba(255,255,255,.88);padding:100px 0;}
+.mission-inner{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;}
+.mission-photo{aspect-ratio:4/3;overflow:hidden;background:var(--bg-alt);}
+.mission-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.mission-tag{font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;}
+.mission-tag::before{content:'';width:20px;height:1.5px;background:var(--gold);}
+.mission-title{font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:1.8rem;}
+.mission-body p{font-size:.9rem;font-weight:300;line-height:2;color:var(--text-2);margin-bottom:1.6rem;}
+.mission-body p:last-child{margin-bottom:0;}
+
+/* ━━━ SERVICES — 白×グレーベース ━━━ */
+#services{background:rgba(246,246,244,.9);padding:100px 0;position:relative;overflow:hidden;}
+#services::before{
+  content:'SERVICES';position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:18vw;font-weight:900;
+  color:rgba(12,28,53,.04);letter-spacing:-.02em;
+  pointer-events:none;user-select:none;line-height:1;white-space:nowrap;
+}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+/* ホワイトカード — ゴールド上ボーダー */
+.service-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-top:4px solid var(--gold);
+  padding:3rem 2.8rem;
+  position:relative;overflow:hidden;
+  transition:background .3s,box-shadow .3s;
+}
+.service-card:hover{background:var(--bg);box-shadow:0 4px 24px rgba(12,28,53,.08);}
+
+.service-type{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:9px;margin-bottom:1.2rem;}
+.service-type::before{content:'';width:14px;height:1px;background:var(--gold);}
+.service-name-en{font-family:var(--mono);font-size:1.6rem;font-weight:900;letter-spacing:-.01em;line-height:.92;color:var(--navy);margin-bottom:.4rem;}
+.service-name-jp{font-size:1rem;font-weight:500;color:var(--text-3);margin-bottom:2rem;}
+
+.schedule-table{width:100%;border-collapse:collapse;margin-bottom:2rem;}
+.schedule-table tr{border-bottom:1px solid var(--border);}
+.schedule-table th{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);padding:.9rem 0;width:90px;text-align:left;vertical-align:top;}
+.schedule-table td{font-size:.82rem;font-weight:300;color:var(--text-2);padding:.9rem 0 .9rem 1rem;line-height:1.7;}
+.schedule-table td strong{font-weight:600;color:var(--navy);}
+
+.service-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;}
+.badge{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.1em;padding:5px 12px;border:1px solid rgba(191,148,34,.4);color:var(--gold);}
+
+.service-btns{display:flex;flex-wrap:wrap;gap:.6rem;}
+.btn-gold{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:11px 22px;display:inline-flex;align-items:center;gap:8px;transition:background .25s,transform .2s;}
+.btn-gold:hover{background:#ceaa38;transform:translateY(-1px);}
+.btn-outline-navy{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);border:1px solid var(--border-md);padding:10px 20px;display:inline-flex;align-items:center;gap:7px;transition:border-color .25s,color .25s;}
+.btn-outline-navy:hover{border-color:var(--navy);color:var(--navy);}
+.location-group{margin-bottom:1.2rem;}
+.location-label{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:.6rem;}
+.location-btns{display:flex;flex-wrap:wrap;gap:.5rem;}
+
+/* COACH */
+#coach{background:rgba(246,246,244,.9);padding:100px 0;}
+.coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.coach-card{background:rgba(255,255,255,.95);display:grid;grid-template-columns:220px 1fr;min-height:360px;overflow:hidden;transition:box-shadow .3s;}
+.coach-card:hover{box-shadow:0 4px 24px rgba(12,28,53,.1);}
+.coach-photo{position:relative;overflow:hidden;}
+.coach-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.coach-label{position:absolute;bottom:0;left:0;right:0;background:var(--navy);padding:1rem 1.2rem;}
+.coach-name{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.2rem;}
+.coach-role{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.coach-text{padding:2.2rem 2.4rem;}
+.coach-career-label{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.coach-career-label::before{content:'';width:14px;height:1.5px;background:var(--blue);}
+.coach-career-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.8rem;}
+.coach-career-list li{font-size:.82rem;font-weight:300;color:var(--text-2);padding-left:1rem;position:relative;line-height:1.6;}
+.coach-career-list li::before{content:'';position:absolute;left:0;top:.55em;width:5px;height:5px;background:var(--gold);border-radius:50%;}
+.coach-detail-link{font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);display:inline-flex;align-items:center;gap:7px;border-bottom:1px solid var(--blue);padding-bottom:2px;transition:gap .25s;}
+.coach-detail-link:hover{gap:12px;}
+
+/* SNS */
+#sns-links{background:rgba(255,255,255,.88);padding:70px 0;}
+.sns-row{display:flex;gap:2px;flex-wrap:wrap;}
+
+/* 共通ベース */
+.sns-card{
+  flex:1;min-width:180px;
+  padding:2.2rem 2rem;
+  display:flex;align-items:center;gap:1.4rem;
+  border:none;
+  transition:transform .25s var(--ease),box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.sns-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.14);}
+.sns-card svg{width:32px;height:32px;flex-shrink:0;transition:transform .3s;}
+.sns-card:hover svg{transform:scale(1.1);}
+
+/* プラットフォーム名ラベル */
+.sns-card-platform{
+  font-family:var(--mono);font-size:.55rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:.3rem;opacity:.65;
+}
+.sns-card-name{
+  font-family:var(--mono);font-size:.7rem;font-weight:700;
+  letter-spacing:.06em;line-height:1.5;
+}
+
+/* LINE — グリーングラデ */
+.sns-line{background:linear-gradient(135deg,#00B900 0%,#06C755 60%,#4CD964 100%);}
+.sns-line svg{fill:#fff;}
+.sns-line .sns-card-platform,.sns-line .sns-card-name{color:#fff;}
+
+/* Instagram — ピンク〜オレンジグラデ */
+.sns-instagram{background:linear-gradient(135deg,#833AB4 0%,#E1306C 50%,#F77737 100%);}
+.sns-instagram svg{fill:#fff;}
+.sns-instagram .sns-card-platform,.sns-instagram .sns-card-name{color:#fff;}
+
+/* TikTok — ダーク + シアン〜ピンクグラデ */
+.sns-tiktok{background:linear-gradient(135deg,#010101 0%,#1a1a2e 60%,#16213e 100%);}
+.sns-tiktok svg{fill:#69C9D0;}
+.sns-tiktok .sns-card-platform{color:#69C9D0;}
+.sns-tiktok .sns-card-name{color:#fff;}
+
+/* Linktree — 薄めオレンジグラデ */
+.sns-linktree{background:linear-gradient(135deg,#FFAA5A 0%,#FF8C42 55%,#FF6B35 100%);}
+.sns-linktree svg{fill:#fff;}
+.sns-linktree .sns-card-platform,.sns-linktree .sns-card-name{color:#fff;}
+
+/* CONTACT */
+#contact-band{background:var(--navy);padding:80px 0;}
+.contact-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;}
+.contact-left h2{font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;letter-spacing:-.01em;line-height:.95;color:var(--white);margin-bottom:.7rem;}
+.contact-left p{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.42);}
+.btn-white{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 32px;background:var(--white);color:var(--navy);transition:box-shadow .25s,transform .2s;}
+.btn-white:hover{box-shadow:0 8px 22px rgba(0,0,0,.2);transform:translateY(-2px);}
+
+/* FOOTER */
+#site-footer{background:var(--dark);padding:64px 0 36px;}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:2rem;}
+.foot-brand-name{font-family:var(--mono);font-size:1.35rem;font-weight:800;letter-spacing:.2em;color:var(--white);margin-bottom:.4rem;}
+.foot-brand-jp{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+.foot-tagline{font-size:.75rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.25);margin-bottom:1.6rem;}
+.foot-socials{display:flex;gap:.5rem;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:border-color .25s,background .25s;}
+.fsoc:hover{border-color:var(--gold);background:rgba(191,148,34,.07);}
+.fsoc svg{width:13px;height:13px;fill:rgba(255,255,255,.38);transition:fill .25s;}
+.fsoc:hover svg{fill:var(--gold);}
+.foot-col h4{font-family:var(--mono);font-size:.55rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:1.1rem;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.foot-col a{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.38);transition:color .2s;}
+.foot-col a:hover{color:var(--white);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.foot-copy{font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.18);}
+.foot-badge{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.26em;color:rgba(191,148,34,.28);}
+
+@media(max-width:960px){
+  .nav-list,.hdr-cta{display:none;}
+  .mission-inner,.services-grid,.coach-grid{grid-template-columns:1fr;}
+  .coach-card{grid-template-columns:1fr;}
+  .coach-photo img{height:280px;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  #page-hero{min-height:240px;}
+  .foot-grid{grid-template-columns:1fr;}
+  .sns-card{min-width:140px;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ HOME ══ -->
+<div class="page-panel active" id="panel-home">
+<!-- ══════════════════════════════
+     ① HEADER
+══════════════════════════════ -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="#" onclick="navigate('home');return false;" class="logo">
+      <img class="logo-img"
+           src="https://relonis-rr.com/wp-content/uploads/2025/10/ChatGPT-Image-2025%E5%B9%B410%E6%9C%8821%E6%97%A5-16_37_49-e1761032960576.png"
+           alt="RELONIS">
+    </a>
+    <ul class="nav-list">
+      <li><a href="#topics">トピックス</a></li>
+      <li><a href="#" onclick="navigate('about');return false;">企業情報</a></li>
+      <li><a href="#business">事業内容</a></li>
+      <li><a href="#sns">SNS</a></li>
+      <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+    </ul>
+    <a href="#" onclick="navigate('recruit');return false;" class="hdr-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-atm"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-vbar"></div>
+
+  <div class="hero-body wrap">
+    <p class="hero-tag">合同会社Relonis &ensp;—&ensp; Relation-Path-Athlete</p>
+
+    <h1 class="hero-h1">
+      ATHLETE CAREER
+      <span class="hl-sub">× SPORTS EDUCATION</span>
+    </h1>
+
+    <p class="hero-tagline">
+      アスリートの経験が、社会の「インフラ」となる未来を創る。
+    </p>
+
+    <div class="hero-btns">
+      <a href="#" onclick="navigate('about');return false;" class="btn btn-white">企業情報を見る</a>
+      <a href="#business" class="btn btn-ghost">事業内容を見る</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="sc-word">SCROLL</span>
+    <div class="sc-bar"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ② TOPICS
+══════════════════════════════ -->
+<section id="topics">
+  <div class="wrap">
+    <div class="topics-hdr rev">
+      <div>
+        <p class="sec-label">Topics</p>
+        <h2 class="sec-title">トピックス</h2>
+      </div>
+      <a href="#" class="link-all">一覧を見る →</a>
+    </div>
+
+    <div class="news-list">
+      <div class="news-row rev d1">
+        <span class="nr-date">2025.12.19</span>
+        <span class="nr-cat c-school">スクール</span>
+        <p class="nr-title">RELATH BASEが堺市・交野市の2拠点で本格始動。スポーツ教育の新しいスタンダードへ。</p>
+        <span class="nr-arrow">→</span>
+      </div>
+      <div class="news-row rev d2">
+        <span class="nr-date">2025.10.21</span>
+        <span class="nr-cat c-company">会社情報</span>
+        <p class="nr-title">合同会社リロニス、コーポレートサイトを公開しました。</p>
+        <span class="nr-arrow">→</span>
+      </div>
+      <div class="news-row rev d3">
+        <span class="nr-date">2025.10.18</span>
+        <span class="nr-cat c-career">キャリア</span>
+        <p class="nr-title">アスリートキャリア支援事業「NORN」の詳細公開予定。</p>
+        <span class="nr-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ③ 企業情報
+══════════════════════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="panel-hdr rev">
+      <div>
+        <p class="sec-label blue-lbl">About Us</p>
+        <h2 class="sec-title">企業情報</h2>
+      </div>
+      <p class="panel-hdr-right">経営理念・トップメッセージ・会社概要</p>
+    </div>
+
+    <div class="panel-grid cols-2">
+
+      <!-- 経営理念・トップメッセージ・会社概要 -->
+      <a href="#" onclick="navigate('about');return false;" class="panel-card h-tall rev d1">
+        <div class="pc-bg pc-bg-about-1">
+          <div class="pc-deco">
+            <svg viewBox="0 0 400 400" width="360" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="200" cy="200" r="170" stroke="white" stroke-width=".7"/>
+              <circle cx="200" cy="200" r="120" stroke="white" stroke-width=".7"/>
+              <circle cx="200" cy="200" r="70"  stroke="white" stroke-width=".7"/>
+              <line x1="30"  y1="200" x2="370" y2="200" stroke="white" stroke-width=".6"/>
+              <line x1="200" y1="30"  x2="200" y2="370" stroke="white" stroke-width=".6"/>
+              <line x1="80"  y1="80"  x2="320" y2="320" stroke="white" stroke-width=".4"/>
+              <line x1="320" y1="80"  x2="80"  y2="320" stroke="white" stroke-width=".4"/>
+            </svg>
+          </div>
+        </div>
+        <div class="pc-overlay"></div>
+        <div class="pc-copy">
+          <p class="pc-en">About Us</p>
+          <p class="pc-title-jp">経営理念・トップメッセージ・会社概要</p>
+          <h3 class="pc-title-en">COMPANY<br>PROFILE</h3>
+          <span class="pc-read">Read More</span>
+        </div>
+      </a>
+
+      <!-- 採用情報 -->
+      <a href="#" onclick="navigate('recruit');return false;" class="panel-card h-tall rev d2">
+        <div class="pc-bg pc-bg-about-2">
+          <div class="pc-deco">
+            <svg viewBox="0 0 400 400" width="360" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="60"  y="60"  width="280" height="280" stroke="white" stroke-width=".7"/>
+              <rect x="100" y="100" width="200" height="200" stroke="white" stroke-width=".7"/>
+              <rect x="140" y="140" width="120" height="120" stroke="white" stroke-width=".7"/>
+              <rect x="178" y="178" width="44"  height="44"  stroke="white" stroke-width=".7"/>
+              <line x1="60"  y1="60"  x2="340" y2="340" stroke="white" stroke-width=".5"/>
+              <line x1="340" y1="60"  x2="60"  y2="340" stroke="white" stroke-width=".5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="pc-overlay"></div>
+        <div class="pc-copy">
+          <p class="pc-en">Recruit</p>
+          <p class="pc-title-jp">採用情報</p>
+          <h3 class="pc-title-en">JOIN<br>RELONIS</h3>
+          <span class="pc-read">Read More</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ④ 事業内容
+══════════════════════════════ -->
+<section id="business">
+  <div class="wrap">
+    <div class="panel-hdr rev">
+      <div>
+        <p class="sec-label blue-lbl">Our Business</p>
+        <h2 class="sec-title">事業内容</h2>
+      </div>
+      <p class="panel-hdr-right">2つの事業でアスリートの人生全体に伴走します。</p>
+    </div>
+
+    <div class="panel-grid cols-2">
+
+      <!-- キャリア支援事業 -->
+      <a href="#" onclick="navigate('norn');return false;" class="panel-card h-tall rev d1">
+        <div class="pc-bg pc-bg-biz-1">
+          <div class="pc-deco">
+            <svg viewBox="0 0 400 400" width="320" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="200" cy="120" rx="28" ry="28" stroke="white" stroke-width=".7"/>
+              <line x1="200" y1="148" x2="200" y2="240" stroke="white" stroke-width="1"/>
+              <line x1="200" y1="175" x2="162" y2="215" stroke="white" stroke-width="1"/>
+              <line x1="200" y1="175" x2="244" y2="208" stroke="white" stroke-width="1"/>
+              <line x1="200" y1="240" x2="174" y2="295" stroke="white" stroke-width="1"/>
+              <line x1="200" y1="240" x2="228" y2="294" stroke="white" stroke-width="1"/>
+              <path d="M80 340 Q140 280 200 300 Q260 320 330 260" stroke="white" stroke-width=".7" fill="none" stroke-dasharray="6 5"/>
+              <polygon points="330,252 338,268 322,268" fill="white" opacity=".6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="pc-overlay"></div>
+        <div class="pc-copy">
+          <p class="pc-en">Career Business</p>
+          <p class="pc-title-jp">アスリートキャリア支援事業</p>
+          <h3 class="pc-title-en">ATHLETE<br>CAREER</h3>
+          <div class="pc-tags">
+            <span class="ptag">採用支援</span>
+            <span class="ptag">キャリア開発</span>
+            <span class="ptag">就職支援</span>
+          </div>
+          <span class="pc-read">Read More</span>
+        </div>
+      </a>
+
+      <!-- スポーツ教育事業 -->
+      <a href="#" onclick="navigate('relath');return false;" class="panel-card h-tall rev d2">
+        <div class="pc-bg pc-bg-biz-2">
+          <div class="pc-deco">
+            <svg viewBox="0 0 400 400" width="320" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="140" y="140" width="120" height="120" transform="rotate(45 200 200)" stroke="white" stroke-width=".7"/>
+              <rect x="110" y="110" width="180" height="180" transform="rotate(45 200 200)" stroke="white" stroke-width=".5"/>
+              <circle cx="200" cy="200" r="14" stroke="white" stroke-width=".7"/>
+              <circle cx="200" cy="200" r="60" stroke="white" stroke-width=".4" stroke-dasharray="5 5"/>
+              <path d="M80 310 L130 260 L170 275 L210 230 L255 245 L310 180" stroke="white" stroke-width=".7" fill="none"/>
+              <circle cx="310" cy="180" r="5" fill="white" opacity=".6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="pc-overlay"></div>
+        <div class="pc-copy">
+          <p class="pc-en">School Business</p>
+          <p class="pc-title-jp">スポーツ教育事業</p>
+          <h3 class="pc-title-en">SPORTS<br>EDUCATION</h3>
+          <div class="pc-tags">
+            <span class="ptag">スポーツスクール</span>
+            <span class="ptag">個別指導</span>
+            <span class="ptag">進学サポート</span>
+          </div>
+          <span class="pc-read">Read More</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ⑤ SNS
+══════════════════════════════ -->
+<section id="sns">
+  <div class="wrap">
+    <div class="sns-hdr rev">
+      <div>
+        <p class="sec-label">Social Media</p>
+        <h2 class="sec-title">SNS</h2>
+      </div>
+    </div>
+
+    <div class="sns-layout rev d1">
+
+      <!-- Instagram featured -->
+      <div class="sns-ig">
+        <div class="sns-ig-top">
+          <div class="sns-ig-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div>
+            <p class="sns-ig-handle">@relonis_official</p>
+            <p class="sns-ig-platform">Instagram</p>
+          </div>
+        </div>
+        <p class="sns-ig-text">リロニスの活動・スクール情報・採用情報などを発信しています。ぜひフォローしてください。</p>
+        <a href="https://www.instagram.com/relonis_official/" target="_blank" class="sns-ig-btn">フォローする →</a>
+      </div>
+
+      <!-- Other platforms -->
+      <div class="sns-other">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/relonis_official/" target="_blank" class="sns-platform sns-ig-card" style="background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
+          <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span class="sns-platform-name">Instagram</span>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/relath_base" target="_blank" class="sns-platform sns-fb-card" style="background:linear-gradient(135deg,#1877f2 0%,#0a5dcf 100%);">
+          <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span class="sns-platform-name">Facebook</span>
+        </a>
+        <!-- お問い合わせ -->
+        <a href="/cdn-cgi/l/email-protection#f59c9b939ab58790999a9b9c86d88787db969a98" class="sns-platform sns-mail-card" style="background:linear-gradient(135deg,#ff8c00 0%,#ff5500 100%);">
+          <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span class="sns-platform-name">お問い合わせ</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT BAND -->
+<section id="contact">
+  <div class="wrap contact-inner">
+    <div class="contact-left rev">
+      <p class="sec-label gold-lbl">Contact</p>
+      <h2>お問い合わせ</h2>
+      <p>キャリア相談・スクール体験・採用情報など、お気軽にご連絡ください。</p>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#60090e060f2012050c0f0e09134d12124e030f0d" class="btn btn-white rev d1" style="white-space:nowrap; flex-shrink:0;">
+      メールで問い合わせる →
+    </a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ⑥ FOOTER（会社署名）
+══════════════════════════════ -->
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" onclick="navigate('home');return false;" style="display:inline-block;margin-bottom:.6rem;">
+          <img src="https://relonis-rr.com/wp-content/uploads/2025/10/ChatGPT-Image-2025%E5%B9%B410%E6%9C%8821%E6%97%A5-16_37_49-e1761032960576.png"
+               alt="RELONIS" style="height:36px;width:auto;display:block;filter:drop-shadow(0 1px 4px rgba(0,0,0,.5));">
+        </a>
+        <p class="foot-brand-jp">合同会社Relonis</p>
+        <p class="foot-tagline">アスリートの経験が、<br>社会の「インフラ」となる未来を創る。</p>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/relonis_official/" target="_blank" class="fsoc fsoc-ig">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@relath_base" target="_blank" class="fsoc fsoc-tt">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/relath_base" target="_blank" class="fsoc fsoc-fb">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('about','#keieirinen');return false;">経営理念</a></li>
+          <li><a href="#" onclick="navigate('about','#topmessage');return false;">トップメッセージ</a></li>
+          <li><a href="#" onclick="navigate('about','#gaiyo');return false;">会社概要</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Business</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('norn');return false;">キャリア支援事業</a></li>
+          <li><a href="#" onclick="navigate('relath');return false;">スポーツ教育事業</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#topics">トピックス</a></li>
+          <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2025 合同会社リロニス / RELONIS LLC. All Rights Reserved.</p>
+      <p class="foot-badge">RELONIS</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div class="page-panel" id="panel-about">
+<!-- HEADER -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="#" onclick="navigate('home');return false;" class="logo"><img class="logo-img" src="https://relonis-rr.com/wp-content/uploads/2025/10/ChatGPT-Image-2025%E5%B9%B410%E6%9C%8821%E6%97%A5-16_37_49-e1761032960576.png" alt="RELONIS" style="height:40px;width:auto;display:block;filter:drop-shadow(0 1px 8px rgba(0,0,0,.6));"></a>
+    <ul class="nav-list">
+      <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+      <li><a href="#" onclick="navigate('about');return false;" class="current">企業情報</a></li>
+      <li><a href="#" onclick="navigate('home','#business');return false;">事業内容</a></li>
+      <li><a href="#" onclick="navigate('home','#sns');return false;">SNS</a></li>
+      <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+    </ul>
+    <a href="#" onclick="navigate('home','#contact');return false;" class="hdr-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-vbar"></div>
+  <div class="page-hero-wordmark">RELONIS</div>
+  <div class="page-hero-body wrap">
+    <p class="page-breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span>/ 企業情報</span></p>
+    <h1 class="page-title">ABOUT US<span class="page-title-suffix"> — 私たちについて —</span></h1>
+    <p class="page-title-jp">経営理念・トップメッセージ・会社情報</p>
+  </div>
+</section>
+
+<!-- PAGE ANCHOR NAV -->
+<nav id="page-nav">
+  <div class="page-nav-inner">
+    <a href="#keieirinen" class="page-nav-link active">経営理念</a>
+    <a href="#topmessage" class="page-nav-link">トップメッセージ</a>
+    <a href="#gaiyo"      class="page-nav-link">会社概要</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════
+     ① 経営理念
+══════════════════════════════ -->
+<section id="keieirinen">
+  <div class="wrap">
+
+    <div class="rev">
+      <p class="sec-label blue-lbl">Philosophy</p>
+      <h2 class="sec-h2">企業理念</h2>
+    </div>
+
+    <div class="rinen-grid">
+      <div class="rinen-card rev d1">
+        <p class="rinen-card-label">企業理念</p>
+        <p class="rinen-card-main">アスリートの経験が、社会の「インフラ」となる未来を創る</p>
+        <div class="rinen-card-subs">
+          <p class="rinen-card-sub">彼ら彼女らの挑戦が次世代を育むエネルギーとなる、そんな好環境を生み出す社会的基盤を築くことを目指します。</p>
+          <p class="rinen-card-sub">アスリートであることが「卓越したビジネスパーソン」への王道となる社会を創ります。</p>
+        </div>
+      </div>
+      <div class="rinen-card rev d2">
+        <p class="rinen-card-label">ビジョン</p>
+        <p class="rinen-card-main">アスリートの「今」と「未来」に、新しい標準を</p>
+        <div class="rinen-card-subs">
+          <p class="rinen-card-sub">競技とキャリアを一本の道と捉え、競技の「今」とキャリアの「未来」に最適解を創ります。</p>
+          <p class="rinen-card-sub">Relation × Path × Athlete の想いのもと、その最適解をアップデートし続けます。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 行動指針 -->
+    <div class="conduct-header rev">
+      <p class="conduct-lead">〜Relonisの行動指針〜 5つの問いかけ</p>
+      <p class="conduct-desc">お客様、社会、そして仲間に対して提供する価値を生み出すための「Relonisの行動指針」です。この5つの問いを通じて、理念・ビジョンを追求します。</p>
+    </div>
+
+    <div class="conduct-grid rev d1">
+      <button class="conduct-card" onclick="toggleConduct(0)">
+        <span class="conduct-card-num">1</span>
+        <span class="conduct-card-q">プロとして、<br>胸を張れているか？</span>
+        <span class="conduct-card-hint">詳細 ▼</span>
+      </button>
+      <button class="conduct-card" onclick="toggleConduct(1)">
+        <span class="conduct-card-num">2</span>
+        <span class="conduct-card-q">その仕事、<br>本質を捉えているか？</span>
+        <span class="conduct-card-hint">詳細 ▼</span>
+      </button>
+      <button class="conduct-card" onclick="toggleConduct(2)">
+        <span class="conduct-card-num">3</span>
+        <span class="conduct-card-q">自らの意思で動き、<br>責任を取っているか？</span>
+        <span class="conduct-card-hint">詳細 ▼</span>
+      </button>
+      <button class="conduct-card" onclick="toggleConduct(3)">
+        <span class="conduct-card-num">4</span>
+        <span class="conduct-card-q">その行動は、<br>信頼に値するか？</span>
+        <span class="conduct-card-hint">詳細 ▼</span>
+      </button>
+      <button class="conduct-card" onclick="toggleConduct(4)">
+        <span class="conduct-card-num">5</span>
+        <span class="conduct-card-q">全力で「今」を<br>楽しんでいるか？</span>
+        <span class="conduct-card-hint">詳細 ▼</span>
+      </button>
+    </div>
+
+    <!-- 展開パネル（カードグリッド直下） -->
+    <div class="conduct-panel" id="conduct-panel">
+      <button class="conduct-panel-close" onclick="closeConduct()">閉じる ×</button>
+      <div class="conduct-panel-inner">
+        <div class="conduct-panel-num" id="cp-num">1</div>
+        <div class="conduct-panel-body">
+          <p class="conduct-panel-q" id="cp-q"></p>
+          <p class="conduct-panel-a" id="cp-a"></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ② トップメッセージ
+══════════════════════════════ -->
+<section id="topmessage">
+  <div class="wrap">
+    <div class="rev">
+      <p class="sec-label blue-lbl">Top Message</p>
+      <h2 class="sec-h2">トップメッセージ</h2>
+    </div>
+  </div>
+
+  <!-- 庄司 力也 の箱 -->
+  <div class="message-block rev d1" style="max-width:1140px;margin-left:auto;margin-right:auto;margin-bottom:3px;">
+    <div class="msg-photo-col">
+      <img src="https://relonis-rr.com/wp-content/uploads/2025/11/6-768x1024.jpg" alt="庄司 力也" loading="lazy">
+      <div class="msg-photo-label">
+        <p class="msg-name">庄司 力也</p>
+        <p class="msg-role">Co-Founder / CEO</p>
+      </div>
+    </div>
+    <div class="msg-text-col">
+      <p class="msg-subtitle">スポーツに育てられ、<br>これからもスポーツに携わっていくものとして</p>
+      <p class="msg-body">25歳、社会人野球3年目のシーズンを終え、プロ野球選手への道を断たれたとき、これまで人生の中心にあった"明確な目標"が途絶えたことが、自身の人生やキャリアと真剣に向き合うきっかけとなりました。</p>
+      <p class="msg-body">その後は意識的に異なる世界の人々との交流を増やし、読書や資格勉強を通じて価値観や視野を広げ、独立を見据えて27歳で引退を決断し、28歳で人材業界への転職を決意しました。</p>
+      <p class="msg-body">私は自身のアスリート経験と職務経験を通じて、アスリートが長年の競技人生で培った力は現代社会において「非常に大きな価値を持つ資産」であると確信しています。一方で、スポーツと社会をつなぐ2つの大きな課題も痛感してきました。</p>
+
+      <p class="msg-body">「日本社会の発展のためにアスリート人材が社会で活躍できる基盤を創ること」「社会で必要とされる人材とスポーツを通じた人間教育を結びつけること」を実現するために、私たちは『アスリートキャリア支援事業』と『スポーツ教育事業』を立ち上げました。</p>
+      <p class="msg-body">スポーツは、国や宗教、世代を超えて人々をつなぎ、感動を生み出す特別な力を持っています。アスリートの持つエネルギーを社会の中で循環させ、誰もが恩恵を受けられる仕組みをつくる。それが、Relonisの目指す未来です。</p>
+      <p class="msg-sig">今後とも、皆様の温かいご支援とご指導を賜りますよう、心よりお願い申し上げます。</p>
+    </div>
+  </div>
+
+  <!-- 飯田 遼 の箱 -->
+  <div class="message-block rev d2" style="max-width:1140px;margin-left:auto;margin-right:auto;">
+    <div class="msg-photo-col">
+      <img src="https://relonis-rr.com/wp-content/uploads/2025/11/7-768x1024.jpg" alt="飯田 遼" loading="lazy">
+      <div class="msg-photo-label">
+        <p class="msg-name">飯田 遼</p>
+        <p class="msg-role">Co-Founder / COO</p>
+      </div>
+    </div>
+    <div class="msg-text-col">
+      <p class="msg-subtitle">「人生にスポーツの心を」</p>
+      <p class="msg-body">小学校から社会人野球まで約20年。人生の大半をスポーツと共に歩み、自ら考え、仲間と協働し、壁を乗り越える中で、人としての芯や社会で生き抜くための基礎を学びました。チームの一員としての責任、キャプテンとしての先頭に立つ覚悟、仲間と成果を分かち合う喜び——そのすべてが今の私の原点です。</p>
+      <p class="msg-body">2019年に現役を退き、営業職として新たな人生を歩み始めましたが、当時はスポーツ経験を通じて学んだことの多くを「スポーツしかしてこなかった」と狭く捉えてしまっていました。そんな中、ビジネスの基礎から学び直し「自分の経験を活かして誰かの不安を解消したい」という想いが芽生え、人材業界へ——キャリア支援を通じ、スポーツで培った力が人と組織を前進させる普遍的な価値であることを実感しました。</p>
+
+      <p class="msg-body">鍛え上げられた心・技・体の全てにスポットライトが当たる社会を創るためには、セカンドキャリア開発・支援とスポーツ教育の両輪からアプローチし、スポーツと社会の距離を縮めていくことが必要だと考えています。</p>
+      <p class="msg-body">Relonisは、セカンドキャリア支援と次世代スポーツ教育を通じて、ユーザー視点から設計し、行動変容に向けた「本物のアスリート支援」を目指します。</p>
+      <p class="msg-sig">今後とも、皆様の温かいご支援とご指導を賜りますよう、心よりお願い申し上げます。</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════
+     ③ 会社概要
+══════════════════════════════ -->
+<section id="gaiyo">
+  <div class="wrap">
+    <div class="rev">
+      <p class="sec-label blue-lbl">Company Overview</p>
+      <h2 class="sec-h2">会社概要</h2>
+    </div>
+    <div class="rev d1">
+      <table class="company-table">
+        <tr><th>社名</th><td>合同会社リロニス（RELONIS LLC）</td></tr>
+        <tr><th>設立</th><td>2026年4月</td></tr>
+        <tr><th>代表CEO</th><td>庄司 力也</td></tr>
+        <tr><th>共同創業者</th><td>飯田 遼（COO）</td></tr>
+        <tr><th>事業内容</th><td>アスリートキャリア支援事業<br>スポーツ教育事業</td></tr>
+        <tr><th>SNS</th><td>@relonis_official</td></tr>
+        <tr><th>Email</th><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e272028210e3c2b222120273d633c3c602d2123">[email&#160;protected]</a></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact-band">
+  <div class="wrap contact-inner">
+    <div class="contact-left rev">
+      <p class="sec-label gold-lbl">Contact</p>
+      <h2>お問い合わせ</h2>
+      <p>キャリア相談・スクール体験・採用情報など、お気軽にご連絡ください。</p>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#88e1e6eee7c8faede4e7e6e1fba5fafaa6ebe7e5" class="btn-white rev d1" style="white-space:nowrap;flex-shrink:0;">メールで問い合わせる →</a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand-name">RELONIS</p>
+        <p class="foot-brand-jp">合同会社リロニス</p>
+        <p class="foot-tagline">アスリートの経験が、<br>社会の「インフラ」となる未来を創る。</p>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/relonis_official/" target="_blank" class="fsoc"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://www.tiktok.com/@relath_base" target="_blank" class="fsoc"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://www.facebook.com/relath_base" target="_blank" class="fsoc"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="#keieirinen">経営理念</a></li><li><a href="#topmessage">トップメッセージ</a></li><li><a href="#gaiyo">会社概要</a></li></ul></div>
+      <div class="foot-col"><h4>Business</h4><ul><li><a href="#" onclick="navigate('norn');return false;">キャリア支援事業</a></li><li><a href="#" onclick="navigate('relath');return false;">スポーツ教育事業</a></li></ul></div>
+      <div class="foot-col"><h4>Info</h4><ul><li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li><li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li><li><a href="#" onclick="navigate('home','#contact');return false;">お問い合わせ</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2025 合同会社リロニス / RELONIS LLC. All Rights Reserved.</p>
+      <p class="foot-badge">RELONIS</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- ══ NORN ══ -->
+<div class="page-panel" id="panel-norn">
+<!-- HEADER -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="#" onclick="navigate('home');return false;" class="logo"><img class="logo-img" src="https://relonis-rr.com/wp-content/uploads/2025/10/ChatGPT-Image-2025%E5%B9%B410%E6%9C%8821%E6%97%A5-16_37_49-e1761032960576.png" alt="RELONIS" style="height:40px;width:auto;display:block;filter:drop-shadow(0 1px 8px rgba(0,0,0,.6));"></a>
+    <ul class="nav-list">
+      <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+      <li><a href="#" onclick="navigate('about');return false;">企業情報</a></li>
+      <li><a href="#" onclick="navigate('home','#business');return false;" class="current">事業内容</a></li>
+      <li><a href="#" onclick="navigate('home','#sns');return false;">SNS</a></li>
+      <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+    </ul>
+    <a href="#contact-section" class="hdr-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-vbar"></div>
+  <div class="page-hero-body wrap">
+    <p class="breadcrumb">
+      <a href="#" onclick="navigate('home');return false;">Home</a>
+      <span>/ 事業内容 / アスリートキャリア支援事業</span>
+    </p>
+    <h1 class="page-title">ATHLETE CAREER</h1>
+    <p class="page-title-sub">アスリートキャリア支援事業</p>
+    <p class="page-title-jp">採用支援・キャリア開発・就職支援</p>
+  </div>
+</section>
+
+<!-- PAGE NAV -->
+<nav id="page-nav">
+  <div class="page-nav-inner">
+    <a href="#mission"         class="pnav-link active">ミッション</a>
+    <a href="#for-society"     class="pnav-link">社会・企業の方へ</a>
+    <a href="#for-athlete"     class="pnav-link">アスリートの方へ</a>
+    <a href="#contact-section" class="pnav-link">お問い合わせ</a>
+  </div>
+</nav>
+
+
+<!-- ① MISSION -->
+<section id="mission">
+  <div class="wrap">
+    <div class="mission-inner">
+
+      <div class="mission-photo rev">
+        <img src="https://relonis-rr.com/wp-content/uploads/2025/10/C32443BF-4BA5-4F61-8B84-F57FC30E35B8.jpeg"
+             alt="アスリートキャリア支援事業" referrerpolicy="no-referrer" loading="lazy">
+      </div>
+
+      <div class="rev d1">
+        <p class="sec-label bl">Mission</p>
+        <h2 class="sec-h2">ミッション</h2>
+        <p class="mission-tag">Career Business</p>
+        <p class="mission-title">「セカンドキャリア」という<br>概念をアップデートする</p>
+        <div class="mission-body">
+          <p>アスリートの経験価値を変化の激しい時代を勝ち抜くための新たなエネルギーへと転換します。アスリートという原石を磨き上げ、先行きの見えない社会に輝きを放つことで、組織のイノベーションを育み、ポテンシャルを最大化させます。</p>
+        </div>
+        <ul class="service-list">
+          <li>アスリート人材のキャリア開発</li>
+          <li>アスリート人材のキャリア支援</li>
+          <li>スポーツ指導支援サービス</li>
+          <li>パーソナルスポーツ指導マッチングサービス</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ② 社会・地域・企業の方へ -->
+<section id="for-society">
+  <div class="wrap">
+    <div class="society-inner">
+
+      <div class="rev">
+        <p class="sec-label bl">For Society &amp; Companies</p>
+        <h2 class="sec-h2">社会・地域・企業の方々へ</h2>
+        <p class="society-lead">
+          アスリート人材の社会での活躍が、<br>
+          <em>不確実な時代を乗り越える推進力</em>となる
+        </p>
+        <div class="society-body">
+          <p>不確定要素が多く、変化の著しい今の時代において、組織が生き残るためには「競争に勝ち抜く力」が求められています。その力を最も持っているのが、まさにアスリート人材です。</p>
+          <p>アスリートが持つポテンシャルを正しく開放し、それぞれが異なる強みを発揮できる環境を整えることは、日本社会が次の時代を生き抜くための鍵だと私たちは考えます。スポーツに本気で向き合ってきた人ほど、戦略的思考力やリーダーシップ、課題解決力など、ビジネスパーソンに求められるスキル要素を高いレベルで備えています。</p>
+          <p>Relonisは、そんなアスリートを「原石」として捉え、その才能を磨き上げ、地域・社会・企業で輝ける人材へと育てていきます。そして、スポーツ教育とキャリア支援の両輪から、人と組織の可能性を最大化し、「努力や挑戦のプロセス」が正当に評価される社会を築いていきます。</p>
+        </div>
+      </div>
+
+      <!-- アスリート人材の強み -->
+      <div class="rev d1">
+        <div class="strength-grid">
+          <div class="strength-card">
+            <div class="strength-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L3.09 8.26L4 21h16l.91-12.74L12 2zm0 3.18l5.74 3.97-.63 8.85H6.89l-.63-8.85L12 5.18z"/></svg>
+            </div>
+            <div>
+              <p class="strength-title">戦略的思考力</p>
+              <p class="strength-desc">勝利という明確な目標に向け、状況を分析し最善手を導き出す力はビジネスの現場でも直結します。</p>
+            </div>
+          </div>
+          <div class="strength-card">
+            <div class="strength-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            </div>
+            <div>
+              <p class="strength-title">リーダーシップ</p>
+              <p class="strength-desc">チームを鼓舞し目標へ引っ張るリーダーシップは、競技の世界で自然と磨かれます。</p>
+            </div>
+          </div>
+          <div class="strength-card">
+            <div class="strength-icon">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+            </div>
+            <div>
+              <p class="strength-title">課題解決力・逆境耐性</p>
+              <p class="strength-desc">困難な局面での粘り強さと課題を乗り越え続けた経験が、不確実な環境での対応力を生みます。</p>
+            </div>
+          </div>
+          <div class="strength-card">
+            <div class="strength-icon">
+              <svg viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
+            </div>
+            <div>
+              <p class="strength-title">セルフマネジメント力</p>
+              <p class="strength-desc">体調・精神・時間を自律的に管理してきた習慣は、プロフェッショナルとしての基礎となります。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ③ アスリートの皆様へ -->
+<section id="for-athlete">
+  <div class="wrap">
+    <div class="athlete-inner">
+
+      <div class="rev d1">
+        <p class="sec-label bl">For Athletes</p>
+        <h2 class="sec-h2">アスリートの皆様へ</h2>
+        <p class="athlete-lead">納得いくまで競技人生に打ち込み、<br>納得する形でアスリート人生を全うして欲しい</p>
+        <div class="athlete-body">
+          <p>スポーツに本気で打ち込んできた人は、セルフマネジメント力が高く、競技以外の世界でも活躍できる可能性を秘めています。しかし、実態としてロールモデルが少ないのが現状です。</p>
+          <p>Relonisは「アスリート人生とその後のキャリアが一本で繋がる社会」を目指し、安心して競技に打ち込める環境をつくります。引退後に「やりたいことが見つからない」と感じるのは自然なこと。</p>
+          <p>私たちはその不安に寄り添い、「できるようになりたいこと」や「手に入れたいこと」を共に考え、キャリアの糸口を創ります。</p>
+        </div>
+        <div class="athlete-promise">
+          <p>かつて競技に向き合っていた時と同じ情熱、いや、それ以上の熱量で、<strong>次のフィールドで輝けるよう全力で伴走いたします。</strong></p>
+        </div>
+      </div>
+
+      <div class="athlete-photo rev d2">
+        <img src="https://relonis-rr.com/wp-content/uploads/2025/10/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2025-10-19-11.28.02.png"
+             alt="アスリートキャリア支援" referrerpolicy="no-referrer" loading="lazy"
+             onerror="this.parentElement.style.background='var(--bg-alt)'">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ④ お問い合わせ -->
+<section id="contact-section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rev">
+        <p class="sec-label bl">Contact</p>
+        <h2 class="sec-h2">お問い合わせ</h2>
+        <div class="contact-intro">
+          <p>キャリア相談・採用のご相談・スポーツ指導に関するお問い合わせなど、お気軽にご連絡ください。</p>
+          <p>内容を確認のうえ、担当者よりご連絡いたします。</p>
+        </div>
+      </div>
+
+      <div class="rev d1">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">氏名<span>*</span></label>
+            <input type="text" class="form-input" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">メールアドレス<span>*</span></label>
+            <input type="email" class="form-input" placeholder="example@mail.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">題名<span>*</span></label>
+            <input type="text" class="form-input" placeholder="お問い合わせ内容の件名" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">メッセージ本文（任意）</label>
+            <textarea class="form-textarea" placeholder="ご相談内容・ご質問などをご記入ください。"></textarea>
+          </div>
+          <button type="submit" class="form-submit">送信する →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT BAND -->
+<section id="contact-band">
+  <div class="wrap contact-inner">
+    <div class="contact-left rev">
+      <p class="sec-label gd">Mail</p>
+      <h2>メールでのお問い合わせ</h2>
+      <p>フォーム以外でのご連絡もお待ちしております。</p>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#9af3f4fcf5bcb9acaea1e8fff6f5f4f3e9b7e8e8b4f9f5f7" class="btn-white rev d1" style="white-space:nowrap;flex-shrink:0;">
+      info&#64;relonis-rr.com
+    </a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand-name">RELONIS</p>
+        <p class="foot-brand-jp">合同会社Relonis</p>
+        <p class="foot-tagline">アスリートの経験が、<br>社会の「インフラ」となる未来を創る。</p>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/relonis_official/" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@relath_base" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/relath_base" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('about','#keieirinen');return false;">経営理念</a></li>
+          <li><a href="#" onclick="navigate('about','#topmessage');return false;">トップメッセージ</a></li>
+          <li><a href="#" onclick="navigate('about','#gaiyo');return false;">会社概要</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Business</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('norn');return false;">キャリア支援事業</a></li>
+          <li><a href="#" onclick="navigate('relath');return false;">スポーツ教育事業</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+          <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+          <li><a href="norn.html#contact-section">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">&#169; 2025 合同会社Relonis / Relonis LLC. All Rights Reserved.</p>
+      <p class="foot-badge">RELONIS</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- ══ RECRUIT ══ -->
+<div class="page-panel" id="panel-recruit">
+<!-- HEADER -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="#" onclick="navigate('home');return false;" class="logo"><img class="logo-img" src="https://relonis-rr.com/wp-content/uploads/2025/10/ChatGPT-Image-2025%E5%B9%B410%E6%9C%8821%E6%97%A5-16_37_49-e1761032960576.png" alt="RELONIS" style="height:40px;width:auto;display:block;filter:drop-shadow(0 1px 8px rgba(0,0,0,.6));"></a>
+    <ul class="nav-list">
+      <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+      <li><a href="#" onclick="navigate('about');return false;">企業情報</a></li>
+      <li><a href="#" onclick="navigate('home','#business');return false;">事業内容</a></li>
+      <li><a href="#" onclick="navigate('home','#sns');return false;">SNS</a></li>
+      <li><a href="#" onclick="navigate('recruit');return false;" class="current">採用情報</a></li>
+    </ul>
+    <a href="#" onclick="navigate('home','#contact');return false;" class="hdr-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-vbar"></div>
+  <div class="page-hero-body wrap">
+    <p class="breadcrumb">
+      <a href="#" onclick="navigate('home');return false;">Home</a>
+      <span>/ 採用情報</span>
+    </p>
+    <h1 class="page-title">RECRUIT</h1>
+    <p class="page-title-jp">採用情報</p>
+  </div>
+</section>
+
+
+<!-- RECRUIT MAIN -->
+<section id="recruit">
+  <div class="wrap">
+
+    <div class="rev">
+      <p class="sec-label bl">Recruit</p>
+      <h2 class="sec-h2">採用情報</h2>
+    </div>
+
+    <!-- 現在募集なしカード -->
+    <div class="recruit-status-card rev d1">
+      <span class="recruit-status-badge">現在の募集状況</span>
+      <p class="recruit-status-title">現在、募集しておりません。</p>
+      <div class="recruit-status-body">
+        <p>弊社にご関心をお寄せいただき、誠にありがとうございます。</p>
+        <p>大変申し訳ございませんが、現在全ての職種について募集はしておりません。</p>
+        <p>募集開始時に、こちらのページでお知らせいたします。</p>
+      </div>
+    </div>
+
+    <!-- 採用に向けたメッセージ -->
+    <div class="recruit-appeal rev d2">
+      <p class="recruit-appeal-lbl">Message to Future Members</p>
+      <p class="recruit-appeal-text">
+        アスリートの経験を社会へつなぐという、まだ誰も実現しきれていないミッションに挑む仲間を、これからも探しています。スポーツが好きで、人の可能性を信じ、社会に本質的な変化を起こしたいと思う方、ぜひお気軽にお問い合わせください。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact-band">
+  <div class="wrap contact-inner">
+    <div class="contact-left rev">
+      <p class="sec-label gd">Contact</p>
+      <h2>お問い合わせ</h2>
+      <p>採用に関するご質問・ご相談もお気軽にどうぞ。</p>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#4821262e276e6b7e7c733a2d242726213b653a3a662b2725" class="btn-white rev d1" style="white-space:nowrap;flex-shrink:0;">
+      メールで問い合わせる →
+    </a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand-name">RELONIS</p>
+        <p class="foot-brand-jp">合同会社Relonis</p>
+        <p class="foot-tagline">アスリートの経験が、<br>社会の「インフラ」となる未来を創る。</p>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/relonis_official/" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@relath_base" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/relath_base" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('about','#keieirinen');return false;">経営理念</a></li>
+          <li><a href="#" onclick="navigate('about','#topmessage');return false;">トップメッセージ</a></li>
+          <li><a href="#" onclick="navigate('about','#gaiyo');return false;">会社概要</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Business</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('norn');return false;">キャリア支援事業</a></li>
+          <li><a href="#" onclick="navigate('relath');return false;">スポーツ教育事業</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+          <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+          <li><a href="#" onclick="navigate('home','#contact');return false;">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">&#169; 2025 合同会社Relonis / Relonis LLC. All Rights Reserved.</p>
+      <p class="foot-badge">RELONIS</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- ══ RELATH BASE ══ -->
+<div class="page-panel" id="panel-relath">
+<!-- HEADER -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="#" onclick="navigate('home');return false;" class="logo"><img class="logo-img" src="https://relonis-rr.com/wp-content/uploads/2025/10/ChatGPT-Image-2025%E5%B9%B410%E6%9C%8821%E6%97%A5-16_37_49-e1761032960576.png" alt="RELONIS" style="height:40px;width:auto;display:block;filter:drop-shadow(0 1px 8px rgba(0,0,0,.6));"></a>
+    <ul class="nav-list">
+      <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+      <li><a href="#" onclick="navigate('about');return false;">企業情報</a></li>
+      <li><a href="#" onclick="navigate('home','#business');return false;" class="current">事業内容</a></li>
+      <li><a href="#" onclick="navigate('home','#sns');return false;">SNS</a></li>
+      <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+    </ul>
+    <a href="#" onclick="navigate('home','#contact');return false;" class="hdr-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-vbar"></div>
+  <div class="page-hero-body wrap">
+    <p class="breadcrumb">
+      <a href="#" onclick="navigate('home');return false;">Home</a>
+      <span>/ 事業内容 / スポーツ教育事業</span>
+    </p>
+    <h1 class="page-title">RELATH BASE</h1>
+    <p class="page-title-sub">スポーツ教育事業</p>
+    <p class="page-title-jp">スクール×チーム・個別指導・進学サポート</p>
+  </div>
+</section>
+
+<!-- PAGE NAV -->
+<nav id="page-nav">
+  <div class="page-nav-inner">
+    <a href="#mission"  class="pnav-link active">ミッション</a>
+    <a href="#services" class="pnav-link">サービス</a>
+    <a href="#coach"    class="pnav-link">コーチ経歴</a>
+  </div>
+</nav>
+
+
+<!-- ① MISSION -->
+<section id="mission">
+  <div class="wrap">
+    <div class="mission-inner">
+
+      <div class="mission-photo rev">
+        <img src="https://relonis-rr.com/wp-content/uploads/2025/10/A971CA49-F7F4-47D5-8CC1-FD134A20B376.jpeg"
+             alt="RELATH BASE 野球スクール" referrerpolicy="no-referrer" loading="lazy">
+      </div>
+
+      <div class="rev d1">
+        <p class="sec-label bl">Mission</p>
+        <h2 class="sec-h2">ミッション</h2>
+        <p class="mission-tag">School Business</p>
+        <p class="mission-title">新しいスポーツ教育の<br>スタンダードを創る</p>
+        <div class="mission-body">
+          <p>チームとスクールで教えが異なることで、子どもたちが困惑している実態を、私たちはチームとスクールが連携した一貫指導を実現することで解消し、子どもの技術向上・人間的成長を育みます。また子・親・指導者が三位一体となり、一人ひとりの高校進学まで長期伴走するもう一つの教育機関となります。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ② SERVICES — 白×グレーベース -->
+<section id="services">
+  <div class="wrap">
+    <div class="rev">
+      <p class="sec-label gd">Our Services</p>
+      <h2 class="sec-h2">RELATH BASEのサービス</h2>
+    </div>
+    <div class="services-grid">
+
+      <!-- 野球スクール -->
+      <div class="service-card rev d1">
+        <p class="service-type">School × Team</p>
+        <p class="service-name-en">野球スクール</p>
+        <p class="service-name-jp">RELATH BASE</p>
+        <table class="schedule-table">
+          <tr><th>堺</th><td><strong>毎週木曜</strong> 19:00〜21:00</td></tr>
+          <tr><th>交野</th><td><strong>毎週火曜</strong> 19:00〜21:00</td></tr>
+          <tr><th>対象</th><td>小学6年生〜中学1年生</td></tr>
+          <tr><th>特徴</th><td>チームとスクールの一貫指導</td></tr>
+        </table>
+        <div class="service-badges">
+          <span class="badge">スクール開始 2026年4月〜</span>
+          <span class="badge">チーム始動 2027年4月〜</span>
+          <span class="badge">定員 15名限定 / 各学年</span>
+        </div>
+        <div class="service-btns">
+          <a href="https://serene-praline-a2ae96.netlify.app/" target="_blank" class="btn-gold">無料体験を申込む →</a>
+        </div>
+      </div>
+
+      <!-- 個別指導レッスン -->
+      <div class="service-card rev d2">
+        <p class="service-type">Private Lesson</p>
+        <p class="service-name-en">個別指導レッスン</p>
+        <p class="service-name-jp">RELATH BASE</p>
+        <table class="schedule-table">
+          <tr><th>堺</th><td><strong>毎週土曜・祝日</strong> 16:00〜21:00</td></tr>
+          <tr><th>交野</th><td><strong>毎週日曜</strong> 16:00〜21:00</td></tr>
+          <tr><th>対象</th><td>小学生〜大人一般</td></tr>
+          <tr><th>備考</th><td>性別・野球経験不問</td></tr>
+        </table>
+        <div class="service-btns" style="flex-direction:column;gap:1rem;">
+          <div class="location-group">
+            <p class="location-label">堺</p>
+            <div class="location-btns">
+              <a href="https://reserva.be/indig/reserve?mode=service_staff&search_evt_no=9ceJwzM7M0NQQAAzEBDA&ctg_no=17eJwzNDA3NQQAAvoA_w" target="_blank" class="btn-gold">投手レッスンを予約する →</a>
+              <a href="https://reserva.be/indig/reserve?mode=service_staff&search_evt_no=09eJwzNDQ0MrIEAAQYATE&ctg_no=17eJwzNDA3NQQAAvoA_w" target="_blank" class="btn-outline-navy">野手レッスンを予約する →</a>
+            </div>
+          </div>
+          <div class="location-group">
+            <p class="location-label">交野</p>
+            <div class="location-btns">
+              <a href="https://reserva.be/relathbase217" target="_blank" class="btn-gold">投手レッスンを予約する →</a>
+              <a href="https://reserva.be/relathbase217" target="_blank" class="btn-outline-navy">野手レッスンを予約する →</a>
+            </div>
+          </div>
+          <a href="https://linktr.ee/relathbase" target="_blank" class="btn-outline-navy" style="align-self:flex-start;">詳細はこちら →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ③ COACH -->
+<section id="coach">
+  <div class="wrap">
+    <div class="rev">
+      <p class="sec-label bl">Coaches</p>
+      <h2 class="sec-h2">コーチ経歴</h2>
+    </div>
+    <div class="coach-grid">
+
+      <!-- 庄司 力也 -->
+      <div class="coach-card rev d1">
+        <div class="coach-photo">
+          <img src="https://relonis-rr.com/wp-content/uploads/2025/10/IMG_3340.jpeg"
+               alt="庄司 力也" referrerpolicy="no-referrer" loading="lazy">
+          <div class="coach-label">
+            <p class="coach-name">庄司 力也</p>
+            <p class="coach-role">Head Coach</p>
+          </div>
+        </div>
+        <div class="coach-text">
+          <p class="coach-career-label">Career</p>
+          <ul class="coach-career-list">
+            <li>湖南ボーイズ</li>
+            <li>滋賀県立水口高等学校</li>
+            <li>奈良学園大学</li>
+            <li>パナソニック（社会人野球）</li>
+          </ul>
+          <a href="https://note.com/preview/n68d6cc3235ed?prev_access_key=7c07e72057ab2f2bf0f270f98610ca8d" target="_blank" class="coach-detail-link">経歴詳細はこちら →</a>
+        </div>
+      </div>
+
+      <!-- 飯田 遼 -->
+      <div class="coach-card rev d2">
+        <div class="coach-photo">
+          <img src="https://relonis-rr.com/wp-content/uploads/2025/10/IMG_3339-683x1024.jpeg"
+               alt="飯田 遼" referrerpolicy="no-referrer" loading="lazy">
+          <div class="coach-label">
+            <p class="coach-name">飯田 遼</p>
+            <p class="coach-role">Head Coach</p>
+          </div>
+        </div>
+        <div class="coach-text">
+          <p class="coach-career-label">Career</p>
+          <ul class="coach-career-list">
+            <li>天理シニア</li>
+            <li>龍谷大付属平安高等学校</li>
+            <li>奈良学園大学</li>
+            <li>日本製鉄瀬戸内（旧：日本製鉄広畑）</li>
+          </ul>
+          <a href="https://note.com/preview/n8ec73e2f8808?prev_access_key=427c9b6e49c475b46908dd18588d14ce" target="_blank" class="coach-detail-link">経歴詳細はこちら →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SNS — LINE→Instagram→TikTok→Linktree、各ブランドカラー反映 -->
+<section id="sns-links">
+  <div class="wrap">
+    <div class="rev" style="margin-bottom:2rem;">
+      <p class="sec-label bl">SNS</p>
+      <h2 class="sec-h2">公式SNS</h2>
+    </div>
+    <div class="sns-row rev d1">
+
+      <!-- LINE — ブランドカラー #06C755 -->
+      <a href="https://lin.ee/relathbase" target="_blank" class="sns-card sns-line">
+        <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        <div>
+          <p class="sns-card-platform">LINE</p>
+          <p class="sns-card-name">公式LINE<br>友だち追加</p>
+        </div>
+      </a>
+
+      <!-- Instagram — ブランドカラー グラデーション #E1306C / #F77737 -->
+      <a href="https://www.instagram.com/relath_base.skill_up" target="_blank" class="sns-card sns-instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <div>
+          <p class="sns-card-platform">Instagram</p>
+          <p class="sns-card-name">@relath_base<br>.skill_up</p>
+        </div>
+      </a>
+
+      <!-- TikTok — ブランドカラー #010101（黒）+ シアンアクセント #69C9D0 -->
+      <a href="https://www.tiktok.com/@relath_base" target="_blank" class="sns-card sns-tiktok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        <div>
+          <p class="sns-card-platform">TikTok</p>
+          <p class="sns-card-name">@relath_base</p>
+        </div>
+      </a>
+
+      <!-- Linktree — ブランドカラー #43E660 -->
+      <a href="https://linktr.ee/relathbase" target="_blank" class="sns-card sns-linktree">
+        <svg viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93s-3.05 7.44-7 7.93v2.02c5.05-.5 9-4.76 9-9.95S18.05 2.55 13 2.05zM11 2.05C5.95 2.55 2 6.81 2 12s3.95 9.45 9 9.95v-2.02C7.05 19.44 4 16.08 4 12s3.05-7.44 7-7.93V2.05zM11.5 16l4.5-4-4.5-4v3H7v2h4.5v3z"/></svg>
+        <div>
+          <p class="sns-card-platform">Linktree</p>
+          <p class="sns-card-name">詳細はこちら</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact-band">
+  <div class="wrap contact-inner">
+    <div class="contact-left rev">
+      <p class="sec-label gd">Contact</p>
+      <h2>お問い合わせ</h2>
+      <p>体験申込・ご質問など、お気軽にご連絡ください。</p>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#0d64636b622b2e3b39367f68616263647e207f7f236e6260" class="btn-white rev d1" style="white-space:nowrap;flex-shrink:0;">
+      メールで問い合わせる →
+    </a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand-name">RELONIS</p>
+        <p class="foot-brand-jp">合同会社Relonis</p>
+        <p class="foot-tagline">アスリートの経験が、<br>社会の「インフラ」となる未来を創る。</p>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/relonis_official/" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@relath_base" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/relath_base" target="_blank" class="fsoc">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('about','#keieirinen');return false;">経営理念</a></li>
+          <li><a href="#" onclick="navigate('about','#topmessage');return false;">トップメッセージ</a></li>
+          <li><a href="#" onclick="navigate('about','#gaiyo');return false;">会社概要</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Business</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('norn');return false;">キャリア支援事業</a></li>
+          <li><a href="#" onclick="navigate('relath');return false;">スポーツ教育事業</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#" onclick="navigate('home','#topics');return false;">トピックス</a></li>
+          <li><a href="#" onclick="navigate('recruit');return false;">採用情報</a></li>
+          <li><a href="#" onclick="navigate('home','#contact');return false;">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">&#169; 2025 合同会社Relonis / Relonis LLC. All Rights Reserved.</p>
+      <p class="foot-badge">RELONIS</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+// ══ ページ管理 ══
+const PAGES = ['home','about','norn','recruit','relath'];
+let currentPage = 'home';
+
+// styleシートの切り替え
+function switchCSS(page) {
+  PAGES.forEach(p => {
+    const el = document.getElementById('page-css-' + p);
+    if (el) el.disabled = (p !== page);
+  });
+}
+
+// ページ切り替え
+function navigate(page, hash) {
+  // 現在のパネルを非表示
+  PAGES.forEach(p => {
+    const el = document.getElementById('panel-' + p);
+    if (el) el.classList.remove('active');
+  });
+
+  // 対象パネルを表示
+  const target = document.getElementById('panel-' + page);
+  if (target) target.classList.add('active');
+
+  // CSS切り替え（homeはデフォルト、サブページは専用CSS）
+  switchCSS(page === 'home' ? 'none' : page);
+
+  currentPage = page;
+
+  // スクロール処理
+  window.scrollTo(0, 0);
+  if (hash) {
+    setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+
+  // タイトル変更
+  const titles = {
+    home:    '合同会社Relonis | RELONIS',
+    about:   '企業情報 | 合同会社Relonis',
+    norn:    'アスリートキャリア支援事業 | 合同会社Relonis',
+    recruit: '採用情報 | 合同会社Relonis',
+    relath:  'スポーツ教育事業 RELATH BASE | 合同会社Relonis',
+  };
+  document.title = titles[page] || titles.home;
+
+  // 各ページのJS初期化
+  initPage(page);
+}
+
+// ── ページ別JS初期化 ──
+function initPage(page) {
+  // ヘッダースクロール（各パネル内のheaderに対して）
+  const hdr = document.getElementById('site-header');
+  if (hdr) {
+    hdr.classList.toggle('solid', window.scrollY > 60);
+  }
+
+  // スクロールリビール
+  const panels = document.querySelectorAll('.page-panel.active .rev');
+  panels.forEach(el => el.classList.add('in'));
+
+  // アンカーナビ（about用）
+  if (page === 'about') {
+    initAbout();
+  }
+}
+
+// ── About ページ固有JS ──
+function initAbout() {
+  // 行動指針アコーディオン（既存関数はグローバルなのでそのまま使用）
+}
+
+// ══ 行動指針アコーディオン ══
+const conducts = [
+  { q: 'プロとして、胸を張れているか？', a: '自らの専門性に誇りを持ち、常に学び、成長し続けます。何事も自分ごととして捉え、常に期待を超える「価値提供」を体現します。' },
+  { q: 'その仕事、本質を捉えているか？', a: '常に「なぜ？」を問い続けます。表面的な解決で満足せず、本質的な課題解決によって真の価値を創造します。' },
+  { q: '自らの意思で動き、責任を取っているか？', a: '自らの意思で考え、判断し、行動し、結果に責任を持ちます。「自律」を、私たちの自由と責任の証とします。' },
+  { q: 'その行動は、信頼に値するか？', a: 'すべてのステークホルダーに誠実な姿勢で向き合います。「倫理観・責任感・思いやり」を持った行動を通じて、信頼という最も大切な資産を築きます。' },
+  { q: '全力で「今」を楽しんでいるか？', a: '予測不能な時代を好機と捉え、スピード感をもって失敗を恐れず挑戦します。目の前の仕事に情熱を注ぎ、その過程を全力で楽しみます。' }
+];
+let openIndex = -1;
+function toggleConduct(idx) {
+  const cards = document.querySelectorAll('.conduct-card');
+  const panel = document.getElementById('conduct-panel');
+  if (!panel) return;
+  if (openIndex === idx) { closeConduct(); return; }
+  cards.forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+    const hint = c.querySelector('.conduct-card-hint');
+    if (hint) hint.textContent = i === idx ? '詳細 ▲' : '詳細 ▼';
+  });
+  document.getElementById('cp-num').textContent = idx + 1;
+  document.getElementById('cp-q').textContent = conducts[idx].q;
+  document.getElementById('cp-a').textContent = conducts[idx].a;
+  panel.classList.add('open');
+  openIndex = idx;
+  setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'nearest' }), 50);
+}
+function closeConduct() {
+  const cards = document.querySelectorAll('.conduct-card');
+  const panel = document.getElementById('conduct-panel');
+  if (!panel) return;
+  cards.forEach(c => {
+    c.classList.remove('active');
+    const hint = c.querySelector('.conduct-card-hint');
+    if (hint) hint.textContent = '詳細 ▼';
+  });
+  panel.classList.remove('open');
+  openIndex = -1;
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && openIndex >= 0) closeConduct();
+});
+
+// ══ ヘッダースクロール ══
+window.addEventListener('scroll', () => {
+  const hdr = document.getElementById('site-header');
+  if (hdr) hdr.classList.toggle('solid', window.scrollY > 60);
+}, { passive: true });
+
+// ══ 初期化 ══
+document.addEventListener('DOMContentLoaded', () => {
+  // 全パネルのrev要素を表示状態にする
+  document.querySelectorAll('.rev').forEach(el => el.classList.add('in'));
+  // ヘッダー初期状態
+  const hdr = document.getElementById('site-header');
+  if (hdr) hdr.classList.toggle('solid', window.scrollY > 60);
+});
+</script>
+</body>
+</html>
