@@ -2087,7 +2087,7 @@ a{text-decoration:none;color:inherit;}
         <tr><th>代表CEO</th><td>庄司 力也</td></tr>
         <tr><th>共同創業者COO</th><td>飯田 遼</td></tr>
         <tr><th>事業内容</th><td>アスリートキャリア支援事業<br>スポーツ教育事業</td></tr>
-        <tr><th>Email</th><td>relonis.rr@gmail.com</td></tr>
+        <tr><th>Email</th><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a180f06050403194418182a0d070b030644090507">[email&#160;protected]</a></td></tr>
       </table>
     </div>
   </div>
@@ -2623,7 +2623,7 @@ a{text-decoration:none;color:inherit;}
         <p class="service-name-jp">RELATH BASE</p>
         <table class="schedule-table">
           <tr><th>堺</th><td><strong>毎週木曜</strong> 19:00〜21:00</td></tr>
-          <tr><th>交野</th><td><strong>毎週金曜</strong> 19:00〜21:00</td></tr>
+          <tr><th>交野</th><td><strong>毎週月曜</strong> 19:00〜21:00</td></tr>
           <tr><th>対象</th><td>小学6年生〜中学1年生</td></tr>
           <tr><th>特徴</th><td>チームとスクールの一貫指導</td></tr>
         </table>
@@ -2854,100 +2854,100 @@ a{text-decoration:none;color:inherit;}
   </div>
 </footer>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-const PAGES = ['home','about','norn','recruit','relath'];
-let currentPage = 'home';
+const PAGES=['home','about','norn','recruit','relath'];
+let currentPage='home';
 
-function switchCSS(page) {
-  PAGES.forEach(p => {
-    const el = document.getElementById('page-css-' + p);
-    if (el) el.disabled = (p !== page);
+function switchCSS(page){
+  PAGES.forEach(p=>{
+    const el=document.getElementById('page-css-'+p);
+    if(el) el.disabled=(p!==page);
   });
 }
 
-function navigate(page, hash) {
-  PAGES.forEach(p => {
-    const el = document.getElementById('panel-' + p);
-    if (el) el.classList.remove('active');
+function navigate(page,hash){
+  PAGES.forEach(p=>{
+    const el=document.getElementById('panel-'+p);
+    if(el) el.classList.remove('active');
   });
-  const target = document.getElementById('panel-' + page);
-  if (target) target.classList.add('active');
-  switchCSS(page === 'home' ? 'none' : page);
-  currentPage = page;
-  window.scrollTo(0, 0);
-  if (hash) {
-    setTimeout(() => {
-      const el = document.querySelector(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 150);
+  const target=document.getElementById('panel-'+page);
+  if(target) target.classList.add('active');
+  switchCSS(page==='home'?'none':page);
+  currentPage=page;
+  window.scrollTo(0,0);
+  if(hash){
+    setTimeout(()=>{
+      const el=document.querySelector(hash);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    },150);
   }
-  const titles = {
-    home:    '合同会社Relonis | RELONIS',
-    about:   '企業情報 | 合同会社Relonis',
-    norn:    'アスリートキャリア支援事業 | 合同会社Relonis',
-    recruit: '採用情報 | 合同会社Relonis',
-    relath:  'スポーツ教育事業 RELATH BASE | 合同会社Relonis',
+  const titles={
+    home:'合同会社Relonis | RELONIS',
+    about:'企業情報 | 合同会社Relonis',
+    norn:'アスリートキャリア支援事業 | 合同会社Relonis',
+    recruit:'採用情報 | 合同会社Relonis',
+    relath:'スポーツ教育事業 RELATH BASE | 合同会社Relonis'
   };
-  document.title = titles[page] || titles.home;
-  const hdr = document.getElementById('site-header');
-  if (hdr) hdr.classList.toggle('solid', window.scrollY > 60);
-  document.querySelectorAll('.page-panel.active .rev').forEach(el => el.classList.add('in'));
+  document.title=titles[page]||titles.home;
+  const hdr=document.getElementById('site-header');
+  if(hdr) hdr.classList.toggle('solid',window.scrollY>60);
+  document.querySelectorAll('.page-panel.active .rev').forEach(el=>el.classList.add('in'));
 }
 
-const conducts = [
-  { q: 'プロとして、胸を張れているか？', a: '自らの専門性に誇りを持ち、常に学び、成長し続けます。何事も自分ごととして捉え、常に期待を超える「価値提供」を体現します。' },
-  { q: 'その仕事、本質を捉えているか？', a: '常に「なぜ？」を問い続けます。表面的な解決で満足せず、本質的な課題解決によって真の価値を創造します。' },
-  { q: '自らの意思で動き、責任を取っているか？', a: '自らの意思で考え、判断し、行動し、結果に責任を持ちます。「自律」を、私たちの自由と責任の証とします。' },
-  { q: 'その行動は、信頼に値するか？', a: 'すべてのステークホルダーに誠実な姿勢で向き合います。「倫理観・責任感・思いやり」を持った行動を通じて、信頼という最も大切な資産を築きます。' },
-  { q: '全力で「今」を楽しんでいるか？', a: '予測不能な時代を好機と捉え、スピード感をもって失敗を恐れず挑戦します。目の前の仕事に情熱を注ぎ、その過程を全力で楽しみます。' }
+const conducts=[
+  {q:'プロとして、胸を張れているか？',a:'自らの専門性に誇りを持ち、常に学び、成長し続けます。何事も自分ごととして捉え、常に期待を超える「価値提供」を体現します。'},
+  {q:'その仕事、本質を捉えているか？',a:'常に「なぜ？」を問い続けます。表面的な解決で満足せず、本質的な課題解決によって真の価値を創造します。'},
+  {q:'自らの意思で動き、責任を取っているか？',a:'自らの意思で考え、判断し、行動し、結果に責任を持ちます。「自律」を、私たちの自由と責任の証とします。'},
+  {q:'その行動は、信頼に値するか？',a:'すべてのステークホルダーに誠実な姿勢で向き合います。「倫理観・責任感・思いやり」を持った行動を通じて、信頼という最も大切な資産を築きます。'},
+  {q:'全力で「今」を楽しんでいるか？',a:'予測不能な時代を好機と捉え、スピード感をもって失敗を恐れず挑戦します。目の前の仕事に情熱を注ぎ、その過程を全力で楽しみます。'}
 ];
-let openIndex = -1;
+let openIndex=-1;
 
-function toggleConduct(idx) {
-  const cards = document.querySelectorAll('.conduct-card');
-  const panel = document.getElementById('conduct-panel');
-  if (!panel) return;
-  if (openIndex === idx) { closeConduct(); return; }
-  cards.forEach((cd, i) => {
-    cd.classList.toggle('active', i === idx);
-    const hint = cd.querySelector('.conduct-card-hint');
-    if (hint) hint.textContent = i === idx ? '詳細 ▲' : '詳細 ▼';
+function toggleConduct(idx){
+  const cards=document.querySelectorAll('.conduct-card');
+  const panel=document.getElementById('conduct-panel');
+  if(!panel) return;
+  if(openIndex===idx){closeConduct();return;}
+  cards.forEach((cd,i)=>{
+    cd.classList.toggle('active',i===idx);
+    const hint=cd.querySelector('.conduct-card-hint');
+    if(hint) hint.textContent=i===idx?'詳細 ▲':'詳細 ▼';
   });
-  document.getElementById('cp-num').textContent = idx + 1;
-  document.getElementById('cp-q').textContent = conducts[idx].q;
-  document.getElementById('cp-a').textContent = conducts[idx].a;
+  document.getElementById('cp-num').textContent=idx+1;
+  document.getElementById('cp-q').textContent=conducts[idx].q;
+  document.getElementById('cp-a').textContent=conducts[idx].a;
   panel.classList.add('open');
-  openIndex = idx;
-  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  openIndex=idx;
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
 
-function closeConduct() {
-  const cards = document.querySelectorAll('.conduct-card');
-  const panel = document.getElementById('conduct-panel');
-  if (!panel) return;
-  cards.forEach(cd => {
+function closeConduct(){
+  const cards=document.querySelectorAll('.conduct-card');
+  const panel=document.getElementById('conduct-panel');
+  if(!panel) return;
+  cards.forEach(cd=>{
     cd.classList.remove('active');
-    const hint = cd.querySelector('.conduct-card-hint');
-    if (hint) hint.textContent = '詳細 ▼';
+    const hint=cd.querySelector('.conduct-card-hint');
+    if(hint) hint.textContent='詳細 ▼';
   });
   panel.classList.remove('open');
-  openIndex = -1;
+  openIndex=-1;
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && openIndex >= 0) closeConduct();
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&openIndex>=0) closeConduct();
 });
 
-window.addEventListener('scroll', () => {
-  const hdr = document.getElementById('site-header');
-  if (hdr) hdr.classList.toggle('solid', window.scrollY > 60);
-}, { passive: true });
+window.addEventListener('scroll',()=>{
+  const hdr=document.getElementById('site-header');
+  if(hdr) hdr.classList.toggle('solid',window.scrollY>60);
+},{passive:true});
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.rev').forEach(el => el.classList.add('in'));
-  const hdr = document.getElementById('site-header');
-  if (hdr) hdr.classList.toggle('solid', window.scrollY > 60);
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.rev').forEach(el=>el.classList.add('in'));
+  const hdr=document.getElementById('site-header');
+  if(hdr) hdr.classList.toggle('solid',window.scrollY>60);
 });
 </script>
 </body>
